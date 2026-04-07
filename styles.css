@@ -11,9 +11,8 @@ img {
 
 /* Page styling */
 body {
-    background-color: #333;
+    background-image:url(images/phoneBG.jpg);
     color: rgb(235, 235, 235);
-    transition: all 2s;
 }
 
 body.switch {
@@ -32,37 +31,23 @@ body.switch {
 }
 
 header {
-    margin: 0 auto 2em auto;
+    /* margin: 0 auto 2em auto; */
+    font-family: "IM Fell Double Pica", serif;
+    margin:auto;
 }
 
-#banner {
-    position: relative;
-    display: flex;
-    width: 1100px;
-    height: 250px;
-    margin: auto;
-    background-color: rgb(235, 235, 235);
-    color: #333;
-    overflow: hidden;
-    display: grid;
-	place-items: center;
-}
-
-#banner.switch {
-    background-color: #333;
-    color: rgb(235, 235, 235);
-    transition: all 2s;
+header.switch {
+    color:yellow;
 }
 
 main {
     display: flex;
     justify-content: space-evenly;
     margin: 1em auto;
+    font-family:"IM Fell Double Pica", serif;
 }
 
 main section {
-    flex: 1;
-    border: 1px rgb(235, 235, 235) dashed;
     margin: 0 .25em;
     padding: 1em;
 }
@@ -81,25 +66,29 @@ section li {
     padding-left: 1.2em;
 }
 
+h3 {
+    color:rebeccapurple;
+}
+
 section a {
     line-height: 1.1em;
     display: inline-block;
     padding: .5em;
-    color: orange;
+    color: white;
 }
 
 section a:hover {
-    background-color: orange;
-    color: #333;
+    background-color: navy;
+    color: white;
 }
 
 section.switch a {
-    color: #333;
+    color: yellow;
 }
 
 section.switch a:hover {
-    background-color: #333;
-    color: rgb(235, 235, 235);
+    background-color: yellow;
+    color: navy;
 }
 
 button {
@@ -107,22 +96,127 @@ button {
     top: 20px;
     right: 20px;
     padding: 12px;
-    background-color: orange;
+    background-color: coral;
     color: #333;
     border: 1px solid transparent;
 }
 
 button:hover {
-    background-color: coral;
+    background-color: navy;
+    color:white;
     cursor: pointer;
 }
 
 button.switch {
-    background-color: rgb(235, 235, 235);
+    background-color: yellow;
     border-color: #333;
 }
 
 button.switch:hover {
     background-color: #333;
     color: rgb(235, 235, 235)
+}
+
+
+
+
+
+@media only screen and (min-width: 650px) {
+}
+
+@media only screen and (min-width: 160px) {
+    body {
+        background-image:url(images/tabletBG.jpg);
+    }
+   
+}
+
+@media only screen and (min-width: 960px) {
+    body {
+        background-image:url(images/macbookBG.jpg);
+        background-position: center 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+
+    header {
+        display:flex;
+        align-items:center;
+        justify-content: space-evenly;
+        gap:20px;
+        font-size:1em;
+    }
+
+    #container {
+        width:500px;
+        margin-right:10px;
+        padding-top:180px;
+        padding-left:50px;
+    }
+
+    main {
+        /* background-color:rgb(209, 106, 74,0.7); */
+        background-image: linear-gradient(to bottom,rgba(209, 106, 74,0.7),rgba(209, 106, 74,0.1));
+        border-radius: 20px;
+    }
+
+    main.switch {
+        background-image: linear-gradient(to bottom,rgba(224, 203, 108, 0.7),rgba(224, 189, 106, 0.1));
+    }
+
+    body.switch {
+        background-image:url(images/macbookBG-night.jpg);
+    }
+
+    #phrase {
+        display:flex;
+        font-size:1.4em;
+        gap:5px;
+        color:navy;
+        position:absolute;
+        top:-10px;
+        left:-250px;
+    }
+
+    #phrase p {
+        transition: opacity 0.6s ease;
+    }
+
+    #phrase p:last-of-type {
+        opacity: 0;
+    }
+
+    body.switch #phrase p:first-of-type {
+        color:yellow;
+    }
+
+    body.switch #phrase p:last-of-type {
+        opacity: 1;
+        color:yellow;
+    }
+
+
+
+}
+
+@media only screen and (min-width: 1201px) {
+    body {
+        background-image:url(images/imacBG.jpg);
+    }
+
+    body.switch {
+        background-image:url(images/imacBG-night.jpg);
+    }
+
+    #container {
+        width:400px;
+        margin-right:10px;
+        padding-top:260px;
+        padding-left:150px;
+    }
+
+    #phrase {
+        left:-400px;
+    }
 }
