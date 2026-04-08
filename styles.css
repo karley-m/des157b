@@ -9,14 +9,14 @@ img {
     height: auto;
 }
 
-/* Page styling */
 body {
     background-image:url(images/phoneBG.jpg);
-    color: rgb(235, 235, 235);
+    background-color: #07375D;
+    color:#E4FAC9;
 }
 
 body.switch {
-    background-color: rgb(235, 235, 235);
+    background-color: #07375D;
     color: #333;
 }
 
@@ -24,27 +24,34 @@ body.switch {
     position: relative;
     width: 100%;
     max-width: 1366px;
-    /* make sure the columns don't get too small and text stays readable */
     min-width: 900px;
     margin: 1em auto;
     padding-top: 2em;
 }
 
 header {
-    /* margin: 0 auto 2em auto; */
-    font-family: "IM Fell Double Pica", serif;
+    font-family: 'rl-horizon';
     margin:auto;
 }
 
-header.switch {
-    color:yellow;
+h2{
+    background-color:#E4FAC9;
+    color:#8B922E;
+}
+
+h2.switch {
+    background-color:#FFBA0D;
+    color:#07375D;
+}
+
+h1.switch {
+    color:#FFBA0D;
 }
 
 main {
     display: flex;
     justify-content: space-evenly;
     margin: 1em auto;
-    font-family:"IM Fell Double Pica", serif;
 }
 
 main section {
@@ -64,30 +71,32 @@ nav ol, nav ul {
 
 section li {
     padding-left: 1.2em;
+    font-family: "Darker Grotesque";
 }
 
 h3 {
-    color:rebeccapurple;
+    color:#E4FAC9;
+    font-family: 'rl-horizon';
+}
+
+.fa-solid {
+    color: #E4FAC9;
 }
 
 section a {
     line-height: 1.1em;
     display: inline-block;
     padding: .5em;
-    color: white;
+    color: #E4FAC9;
 }
 
 section a:hover {
-    background-color: navy;
+    background-color: #07375D;
     color: white;
 }
 
-section.switch a {
-    color: yellow;
-}
-
 section.switch a:hover {
-    background-color: yellow;
+    background-color: #FFBA0D;
     color: navy;
 }
 
@@ -95,29 +104,25 @@ button {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 12px;
-    background-color: coral;
-    color: #333;
-    border: 1px solid transparent;
+    background-color: transparent;
+    border: none;
 }
 
 button:hover {
-    background-color: navy;
-    color:white;
     cursor: pointer;
+    box-shadow: 0 0 20px #fff;
+
 }
 
 button.switch {
-    background-color: yellow;
-    border-color: #333;
+    background-color: transparent;
+    border: none;
 }
 
 button.switch:hover {
-    background-color: #333;
-    color: rgb(235, 235, 235)
+    cursor: pointer;
+    box-shadow: 0 0 20px #fff;
 }
-
-
 
 
 
@@ -140,24 +145,32 @@ button.switch:hover {
         height: 100vh;
     }
 
+    h1,h2 {
+        margin:0;
+    }
+
+    h1{
+        font-size:2.5em;
+        padding-bottom:8px;
+    }
+
     header {
         display:flex;
+        flex-direction:column;
         align-items:center;
         justify-content: space-evenly;
-        gap:20px;
-        font-size:1em;
+        margin-top:10px;
     }
 
     #container {
         width:500px;
         margin-right:10px;
-        padding-top:180px;
+        padding-top:170px;
         padding-left:50px;
     }
 
     main {
-        /* background-color:rgb(209, 106, 74,0.7); */
-        background-image: linear-gradient(to bottom,rgba(209, 106, 74,0.7),rgba(209, 106, 74,0.1));
+        background-image: linear-gradient(to bottom,rgb(139, 146, 46),rgba(139, 146, 46,0));
         border-radius: 20px;
     }
 
@@ -171,29 +184,29 @@ button.switch:hover {
 
     #phrase {
         display:flex;
-        font-size:1.4em;
+        font-size:2.9em;
+        margin:0;
+        font-family: 'deseo-medium';
         gap:5px;
         color:navy;
-        position:absolute;
-        top:-10px;
-        left:-250px;
+        position:fixed;
+        top:10px;
+        left:20px;
+        width:1000px;
     }
 
     #phrase p {
-        transition: opacity 0.6s ease;
+        margin:0;
     }
 
     #phrase p:last-of-type {
         opacity: 0;
     }
 
-    body.switch #phrase p:first-of-type {
-        color:yellow;
-    }
-
     body.switch #phrase p:last-of-type {
         opacity: 1;
-        color:yellow;
+        font-family:'rl-horizon';
+        font-size:44px;
     }
 
 
@@ -203,6 +216,7 @@ button.switch:hover {
 @media only screen and (min-width: 1201px) {
     body {
         background-image:url(images/imacBG.jpg);
+        
     }
 
     body.switch {
@@ -216,7 +230,4 @@ button.switch:hover {
         padding-left:150px;
     }
 
-    #phrase {
-        left:-400px;
-    }
 }
