@@ -1,0 +1,33 @@
+#beach {
+    position:fixed;
+    right:0;
+    bottom:0;
+    min-width:100%;
+    min-height:100%;
+}
+
+#sentences {
+    position:absolute;
+}
+
+#line1 {
+    position:absolute;
+    font-family: redaction-50, sans-serif;
+    font-style: italic;
+    font-size:58px;
+    color:yellowgreen;
+    mix-blend-mode: color-dodge;
+    left:40px;
+}
+
+.fa-expand {
+    position:absolute;
+    top:10px;
+    right:10px;
+    font-size:36px;
+    color:white;
+}
+
+.fa-expand:hover {
+    cursor:pointer;
+}
