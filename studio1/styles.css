@@ -1,5 +1,5 @@
 body {
-    background-color: radial-gradient(hotpink,yellowgreen);
+    background-image: radial-gradient(hotpink,yellowgreen);
     cursor:crosshair;
 }
 
