@@ -1,4 +1,11 @@
-#beach {
+body {
+    background-color: radial-gradient(hotpink,yellowgreen);
+    cursor:crosshair;
+}
+
+#color {
+    background: radial-gradient(#e66465, #9198e5);
+    opacity:0.8;
     position:fixed;
     right:0;
     bottom:0;
@@ -6,8 +13,23 @@
     min-height:100%;
 }
 
-#sentences {
-    position:absolute;
+#beach {
+    position:fixed;
+    right:0;
+    bottom:0;
+    min-width:100%;
+    min-height:100%;
+    opacity:1;
+    transition: opacity 0.1s ease-out;
+}
+
+#sky {
+    opacity:0;
+    position:fixed;
+    right:0;
+    bottom:0;
+    min-width:100%;
+    min-height:100%;
 }
 
 #line1 {
@@ -16,8 +38,23 @@
     font-style: italic;
     font-size:58px;
     color:yellowgreen;
-    mix-blend-mode: color-dodge;
     left:40px;
+    z-index:2;
+}
+
+#line2 {
+    position:absolute;
+    font-family: redaction-50, sans-serif;
+    font-style: italic;
+    font-size:58px;
+    color:yellowgreen;
+    right:40px;
+    bottom:0;
+    z-index:2;
+}
+
+section {
+    mix-blend-mode: color-dodge;
 }
 
 .fa-expand {
@@ -26,8 +63,54 @@
     right:10px;
     font-size:36px;
     color:white;
+    z-index:2;
 }
 
 .fa-expand:hover {
     cursor:pointer;
 }
+
+#overlay {
+    position:fixed;
+    mix-blend-mode: color-burn;
+    right:0;
+    bottom:0;
+    min-width:100%;
+    min-height:100%;
+    opacity:0;
+    transition: opacity 0.1s ease-out;
+    pointer-events:none;
+}
+
+.fa-star {
+    position:absolute;
+    top:50%;
+    left: 50%;
+    font-size: 36px;
+    color: antiquewhite;
+    transform: translate(-50%, -50%);
+    animation: star 2s infinite alternate ease-in-out;
+}
+
+@keyframes star {
+    0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+}
+
+
+
+.hidden {
+    opacity:0;
+}
+
+.show {
+    opacity:1;
+}
+
