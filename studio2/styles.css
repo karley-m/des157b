@@ -1,0 +1,105 @@
+html {
+    background-color: #3B28CC;
+}
+
+body {
+    max-width:1200px;
+    margin:auto;
+}
+
+header {
+    color:#FEDEEE;
+    padding-bottom:25px;
+}
+
+h1 { 
+    font-family: "Barriecito"; 
+    font-size:50px;
+    text-align:center;
+    margin-bottom:0;
+}
+
+h2 { 
+    font-family: "Elms Sans"; 
+    font-size:20px;
+    text-align:center;
+    margin-top:0;
+}
+
+p {
+    color:#FEDEEE;
+    font-family: "Elms Sans";
+    font-size:20px;
+}
+
+.day {
+    background-color:#FEDEEE;
+    color:#3B28CC;
+    padding:35px;
+    border-radius:7px;
+    font-size:40px;
+    font-family: "Elms Sans";
+    font-weight:700;
+}
+
+.day:hover {
+    background-color:#F3FFD6;
+    outline: 5px solid #F3FFD6;
+    outline-offset: 5px;
+    cursor:pointer;
+}
+
+#info {
+    /* border: 2px dashed #3DFF97; */
+    padding-top:70px;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+#visuals {
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    gap:20px;
+}
+
+#options {
+    display:flex;
+    justify-content:space-evenly;
+    gap:5px;
+    padding-bottom:40px;
+}
+
+#legend {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:20px;
+}
+
+#themost {
+    background-color:#FF3DD8;
+    padding:20px;
+}
+
+#very {
+    background-color:#3DFF97;
+    padding:20px;
+}
+
+#somewhat {
+    background-color:#FFBE3D;
+    padding:20px;
+}
+
+#treat {
+    padding:60px;
+    /* border: 2px dashed #3DFF97; */
+    position:relative;
+}
+
+#plate {
+    position:absolute;
+    bottom:0;
+}
+
