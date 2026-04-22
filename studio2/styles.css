@@ -51,11 +51,21 @@ p {
 
 #info {
     /* border: 2px dashed #3DFF97; */
-    padding-top:70px;
+    padding-top:40px;
     display:grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    position:relative;
+    margin-left:50px;
+    z-index:2;
 }
+
+#treat,#time {
+    position:relative;
+    left:-100px;
+    font-weight:800;
+}
+
 
 #visuals {
     display:grid;
@@ -73,8 +83,13 @@ p {
 #legend {
     display:flex;
     flex-direction:column;
-    gap:10px;
-    width:20px;
+    gap:2px;
+}
+
+.legend-item {
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
 #themost {
@@ -92,10 +107,21 @@ p {
     padding:20px;
 }
 
-#treat {
+#meter {
+    position:absolute;
+}
+
+#action {
     padding:60px;
     /* border: 2px dashed #3DFF97; */
     position:relative;
+    z-index:1;
+}
+
+.treatimg {
+    position:absolute;
+    left:25%;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
 }
 
 #plate {
