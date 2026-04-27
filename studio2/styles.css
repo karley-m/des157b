@@ -43,6 +43,11 @@ p {
 }
 
 .day:hover {
+    scale:1.2;
+    cursor:pointer;
+}
+
+.clicked {
     background-color:#F3FFD6;
     outline: 5px solid #F3FFD6;
     outline-offset: 5px;
@@ -50,14 +55,15 @@ p {
 }
 
 #info {
-    /* border: 2px dashed #3DFF97; */
     padding-top:40px;
     display:grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    /* grid-template-rows: repeat(2, 1fr); */
+    grid-template-rows: auto auto 1fr;
     position:relative;
     margin-left:50px;
     z-index:2;
+    height:300px;
 }
 
 #treat,#time {
@@ -65,6 +71,7 @@ p {
     left:-100px;
     font-weight:800;
 }
+
 
 
 #visuals {
@@ -81,6 +88,9 @@ p {
 }
 
 #legend {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+
     display:flex;
     flex-direction:column;
     gap:2px;
@@ -112,20 +122,43 @@ p {
 }
 
 #action {
-    padding:60px;
-    /* border: 2px dashed #3DFF97; */
+    padding:40px;
     position:relative;
     z-index:1;
+    width:500px;
+    height:400px;
 }
 
 .treatimg {
+    bottom:80px;
     position:absolute;
-    left:25%;
+    left:40%;
+    transform: translateX(-50%);
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+    max-width:400px;
+    max-height:300px;
+    width:auto;
+    height:auto;
+}
+
+.side-by-side:first-of-type {
+    left:35%;
+    transform: translateX(-120%);
+}
+
+.side-by-side:last-of-type {
+    left:50%;
+    transform: translateX(20%);
+}
+
+.tall {
+    max-height:300px;
 }
 
 #plate {
     position:absolute;
     bottom:0;
+    left:50%;
+    transform: translateX(-50%);
 }
 

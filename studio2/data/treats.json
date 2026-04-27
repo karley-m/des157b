@@ -1,0 +1,88 @@
+{
+   "14": [
+     {
+       "time": "11:00 AM",
+       "treat": "Strawberries",
+       "delightful_meter": "Very delightful",
+       "image": "images/strawberry.png"
+     },
+     {
+       "time": "3:00 PM",
+       "treat": "Keebler Coconut Cookie",
+       "delightful_meter": "Somewhat delightful",
+       "image": "images/cookie.png"
+     }
+   ],
+   "15": [
+     {
+       "time": "11:00 AM",
+       "treat": "Almond croissant",
+       "delightful_meter": "The most delightful!",
+       "image": "images/croissant.png"
+     },
+     {
+       "time": "7:30 PM",
+       "treat": "Frosted Shredded Wheat",
+       "delightful_meter": "Very delightful",
+       "image": "images/shreddedwheat.png"
+     }
+   ],
+   "16": [
+     {
+       "time": "12:00 PM",
+       "treat": "Tiramisu",
+       "delightful_meter": "The most delightful!",
+       "image": "images/tiramisu.png"
+     },
+     {
+       "time": "4:00 PM",
+       "treat": "Ramune Soda",
+       "delightful_meter": "Very delightful",
+       "image": "images/ramune.png"
+     }
+   ],
+   "17": [
+     {
+       "time": "6:00 PM",
+       "treat": "Mango Popsicle",
+       "delightful_meter": "Very delightful",
+       "image": "images/popsicle.png"
+     }
+   ],
+   "18": [
+     {
+       "time": "12:30 PM",
+       "treat": "Churro Ice Cream Sundae",
+       "delightful_meter": "Somewhat delightful",
+       "image": "images/churro.png"
+     },
+     {
+       "time": "7:30 PM",
+       "treat": "A Rolo",
+       "delightful_meter": "Very delightful",
+       "image": "images/rolo.png"
+     }
+   ],
+   "19": [
+     {
+       "time": "5:00 PM",
+       "treat": "Chocolate seashells",
+       "delightful_meter": "Somewhat delightful",
+       "image": "images/seashell.png"
+     }
+   ],
+   "20": [
+     {
+       "time": "5:00 PM",
+       "treat": "Root beer dum-dum",
+       "delightful_meter": "Somewhat delightful",
+       "image": "images/dumdum.png"
+     },
+     {
+       "time": "8:00 PM",
+       "treat": "Root beer Lindy's Italian Ice",
+       "delightful_meter": "Very delightful",
+       "image": "images/lindys.png"
+     }
+   ]
+ }
