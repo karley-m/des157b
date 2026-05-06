@@ -6,8 +6,6 @@
     Parse.initialize("679197vayz1ilrJfZNPXzfVq9MMm0pausZPNrLtX", "0WK5sxra3pLcJPAJxUQ55RYhADWcIyDhn0p8oPdH"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
     Parse.serverURL = "https://parseapi.back4app.com/";
 
-    
-
     const options = {
         animate: true,
         patternWidth: 100,
@@ -34,6 +32,7 @@
       sound: "#D852A9"
     };
 
+
     window.saveText = async function () {
       const inputValue = document.getElementById("textInput").value;
       const selectedCategory = document.getElementById("categorySelect").value;
@@ -52,10 +51,11 @@
       const allowedCategories = ["person","place","thing","object","pet","idea","smell","taste","sound"];
       
       if (!allowedCategories.includes(selectedCategory)) {
-        alert("Invalid category selected.");
+        alert("invalid category selected");
         return; 
       }
     
+      //sending new data to back4app
       const MyData = Parse.Object.extend("home");
       const myData = new MyData();
     
@@ -69,16 +69,15 @@
         showResultsScreen();
         loadTexts();
         
-        // alert("Saved successfully!");
+        // alert("saved successfully!");
         document.getElementById("textInput").value = "";
         document.getElementById("categorySelect").value = "";
       } catch (error) {
           alert("Error: " + error.message);
       }
 
-      console.log("Saving to class:", myData.className);
+      console.log("saving to class:", myData.className);
     };
-
 
 
     window.addEventListener("DOMContentLoaded", loadTexts);
@@ -90,7 +89,8 @@
       const query = new Parse.Query(MyData);
       query.equalTo("approved", true);
 
-      query.descending("createdAt"); // newest first
+      //putting newest first
+      query.descending("createdAt");
 
       const results = await query.find();
 
@@ -108,7 +108,7 @@
         const div = document.createElement("div");
         div.className = "circle";
 
-        const speed = Math.random() * 6 - 3;
+        const speed = Math.random() * 7 - 3;
         div.setAttribute("data-rellax-speed", speed);
 
         const speedX = Math.random() * 2 - 1;
@@ -120,6 +120,7 @@
           minSize + Math.pow(Math.random(), 0.6) * (maxSize - minSize)
         );
 
+        //circle styling
         div.style.width = size + "px";
         div.style.height = size + "px";
         div.style.margin = Math.random() * 20 + "px";
@@ -136,6 +137,7 @@
 
         div.textContent = text;
 
+        //shrink font size if the circle is small
         if (size < 100) {
           div.style.fontSize = "10px";
         }
@@ -158,6 +160,7 @@
       }, 500); 
     }
 
+    //shuffling order of appearance of the array
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

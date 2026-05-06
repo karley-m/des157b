@@ -144,7 +144,7 @@ footer a {
 
 .screen {
     opacity:1;
-    transition: opacity 0.5s ease;
+    transition: opacity 1.3s ease;
 }
 
 .hidden {
