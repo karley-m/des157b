@@ -1,9 +1,43 @@
+html {
+    background-color:#F2F0D1;
+}
+
+html, body {
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
+
 #resultsScreen {
     display:none;
 }
 
 #inputScreen {
     display:block;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap:wrap;
+    gap:20px;
+    padding: 20px;
+    /* overflow-y: scroll; */
+    width:100vw;
+    min-height: 200vh;
+    position:relative;
+}
+
+.circle {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    text-align:center;
+    border-radius:50%;
+    color:white;
+    padding:10px;
+    word-wrap:break-word;
+    overflow:hidden;
+    position:relative;
 }
 
 .screen {

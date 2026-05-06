@@ -7,15 +7,15 @@
     Parse.serverURL = "https://parseapi.back4app.com/";
 
     const categoryColors = {
-      person: "red",
-      place: "orange",
-      thing: "yellow",
-      object: "gold",
-      pet: "green",
-      idea: "cyan",
-      smell: "blue",
-      taste: "purple",
-      sound: "pink"
+      person: "#E94E5D",
+      place: "#E5AC1C",
+      thing: "#D9C950",
+      object: "#54D661",
+      pet: "#0D9A8F",
+      idea: "#8598C0",
+      smell: "#762391",
+      taste: "#AF1073",
+      sound: "#D852A9"
     };
 
     window.saveText = async function () {
@@ -71,28 +71,59 @@
       const MyData = Parse.Object.extend("home");
       const query = new Parse.Query(MyData);
       query.equalTo("approved", true);
-      query.descending("createdAt");
 
       query.descending("createdAt"); // newest first
 
       const results = await query.find();
 
-      const list = document.getElementById("results");
-      list.innerHTML = "";
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+
+      shuffle(results);
 
       for (let i=0; i < results.length; i++) {
         const obj = results[i];
-        const li = document.createElement("li");
-        li.textContent = obj.get("text");
 
+        const text = obj.get("text");
         const category = obj.get("category");
         const color = categoryColors[category];
+        const div = document.createElement("div");
+        div.className = "circle";
 
-        if (color) {
-            li.style.color = color;
+        const speed = Math.random() * 6 - 3;
+        div.setAttribute("data-rellax-speed", speed);
+
+        const speedX = Math.random() * 2 - 1;
+        div.style.transform = `translateX(${speedX * 10}px)`;
+
+        const minSize = 60;
+        const maxSize = 450;
+        const size = Math.floor(
+          minSize + Math.pow(Math.random(), 0.6) * (maxSize - minSize)
+        );
+
+        div.style.width = size + "px";
+        div.style.height = size + "px";
+        div.style.margin = Math.random() * 20 + "px";
+        div.style.border = "none";
+        div.style.outline = "none";
+        
+        div.style.background = `radial-gradient(circle,
+          ${color} 0%,
+          ${color} 45%,
+          rgba(242,240,209,0) 100%)`;
+
+        div.style.boxShadow = `0 0 25px ${color}`;
+        div.style.opacity = "0.9";
+
+        div.textContent = text;
+
+        if (size < 100) {
+          div.style.fontSize = "10px";
         }
 
-        list.appendChild(li);
+        gallery.appendChild(div);
+        new Rellax(".circle");
       }
     }
 
@@ -107,6 +138,14 @@
       setTimeout(function () {
         resultsScreen.classList.remove("hidden");
       }, 500); // must match CSS transition time
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
 
     
