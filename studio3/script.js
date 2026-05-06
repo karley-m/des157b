@@ -6,6 +6,22 @@
     Parse.initialize("679197vayz1ilrJfZNPXzfVq9MMm0pausZPNrLtX", "0WK5sxra3pLcJPAJxUQ55RYhADWcIyDhn0p8oPdH"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
     Parse.serverURL = "https://parseapi.back4app.com/";
 
+    
+
+    const options = {
+        animate: true,
+        patternWidth: 100,
+        patternHeight: 100,
+        grainOpacity: 0.05,
+        grainDensity: 1,
+        grainWidth: 1,
+        grainHeight: 1
+    }
+
+    // Initialize grained
+    grained('#container', options);
+    grained('#gallery', options);
+
     const categoryColors = {
       person: "#E94E5D",
       place: "#E5AC1C",
@@ -24,12 +40,12 @@
       
     
       if (!inputValue) {
-        alert("Please type something first.");
+        alert("please type something first! anything that comes to mind");
         return;
       }
 
       if (!selectedCategory) {
-        alert("Please select a category.");
+        alert("please select a category first");
         return;
       }
 
@@ -37,7 +53,7 @@
       
       if (!allowedCategories.includes(selectedCategory)) {
         alert("Invalid category selected.");
-        return; // stop everything
+        return; 
       }
     
       const MyData = Parse.Object.extend("home");
@@ -53,7 +69,7 @@
         showResultsScreen();
         loadTexts();
         
-        alert("Saved successfully!");
+        // alert("Saved successfully!");
         document.getElementById("textInput").value = "";
         document.getElementById("categorySelect").value = "";
       } catch (error) {
@@ -61,13 +77,15 @@
       }
 
       console.log("Saving to class:", myData.className);
-      };
+    };
+
 
 
     window.addEventListener("DOMContentLoaded", loadTexts);
 
 
     async function loadTexts() {
+  
       const MyData = Parse.Object.extend("home");
       const query = new Parse.Query(MyData);
       query.equalTo("approved", true);
@@ -131,13 +149,13 @@
       document.getElementById("inputScreen").style.display = "none";
       document.getElementById("resultsScreen").style.display = "block";
 
-      // fade out input screen
+     
       inputScreen.classList.add("hidden");
 
-      // after fade completes, show results screen
+     
       setTimeout(function () {
         resultsScreen.classList.remove("hidden");
-      }, 500); // must match CSS transition time
+      }, 500); 
     }
 
     function shuffle(array) {

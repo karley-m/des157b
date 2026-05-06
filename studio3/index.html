@@ -6,11 +6,16 @@
     <title>Library Liberty</title>
     
     <!-- normalize css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
 
     <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
     <!-- link to my css -->
     <link href="styles.css" rel="stylesheet">
+
 
    <!------ scripts are at bottom of html -------->
     
@@ -18,32 +23,48 @@
 </head>
 <body>
 
-    <div id="inputScreen" class="screen">
-        <h2>Save Text to Back4App</h2>
+    <section id="inputScreen" class="screen">
+        <img class="item" id="scribble" src="scribble.png">
+        <h2 class="item">what does home mean to you?</h2>
 
-        <input type="text" id="textInput" placeholder="Type something..." />
+        <div id="content">
+            <input class="item" type="text" id="textInput" placeholder="type anything..." required/>
+
+            <p class="item">& it's a/an</p>
     
 
-        <select id="categorySelect" required>
-            <option value="">Select a category</option>
-            <option value="person">A person</option>
-            <option value="place">A place</option>
-            <option value="thing">A thing</option>
-            <option value="object">An object</option>
-            <option value="pet">A pet</option>
-            <option value="idea">An idea</option>
-            <option value="smell">A smell</option>
-            <option value="taste">A taste</option>
-            <option value="sound">A sound</option>
-        </select>
+            <select class="item" id="categorySelect" required>
+                <option value="">Select a category</option>
+                <option value="person">person</option>
+                <option value="place">place</option>
+                <option value="thing">thing</option>
+                <option value="object">object</option>
+                <option value="pet">pet</option>
+                <option value="idea">idea</option>
+                <option value="smell">smell</option>
+                <option value="taste">taste</option>
+                <option value="sound">sound</option>
+            </select>
+        </div>
+        
 
-        <button onclick="saveText()">Save</button>
-    </div>
+        <button class="item" onclick="saveText()">submit</button>
+        <p id="psa">*responses are reviewed for approval first*</p>
+    </section>
 
-    <div id="resultsScreen" class="screen hidden">
-        <div id="gallery"></div>
+
+    <div id="container">
+        <div class="grained"></div>
+        <div id="resultsScreen" class="screen hidden">
+            <p id="hint">circles are in no particular order and have a random size<br>scroll through to see what other people are thinking about :)</p>
+            <div id="gallery"></div>
+        </div>
+        
     </div>
         
+    <footer>
+        <p>created with <a href="https://www.back4app.com/">back4app</a>, <a href="https://dixonandmoe.com/rellax/">rellax.js</a>, and <a href="https://sarathsaleem.github.io/grained/#2">grained.js</a></p>
+    </footer>
 
     
 
@@ -52,6 +73,10 @@
 
     <!-- parse script for back4app -->
     <script src="https://unpkg.com/parse/dist/parse.min.js"></script>
+
+    <!-- grain texture script -->
+    <!-- <script src="grained.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/grained@0.0.2/grained.min.js"></script>
 
     <!-- my script -->
     <script src="script.js"></script>
