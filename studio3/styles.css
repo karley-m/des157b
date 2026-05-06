@@ -1,0 +1,17 @@
+#resultsScreen {
+    display:none;
+}
+
+#inputScreen {
+    display:block;
+}
+
+.screen {
+    opacity:1;
+    transition: opacity 0.5s ease;
+}
+
+.hidden {
+    opacity:0;
+    pointer-events:none;
+}

@@ -12,6 +12,7 @@
     const addFriendForm = document.querySelector('#add-friend');
     const editFriendForm = document.querySelector('#edit-friend');
     const friendList = document.querySelector("main ol");
+    const inputs = document.querySelectorAll('#add-friend input:not([type=submit])');
 
     newBtn.addEventListener("click", function(event){
         event.preventDefault();
@@ -20,8 +21,10 @@
 
     addFriendForm.addEventListener("submit", function(event){
         event.preventDefault();
-        addFriendForm.className = "add-friend-offscreen";
+        // addFriendForm.className = "add-friend-offscreen";
+        addFriend();
     });
+
 
     for (let i=0; i < editBtns.length; i++){
         editBtns[i].addEventListener("click", function(event){
@@ -72,6 +75,51 @@
 
             friendList.append(theListItem);
         })
+    }
+
+    async function addFriend() {
+        const newFriend = {};
+    
+        for (let i = 0; i < inputs.length; i++) {
+            let key = inputs[i].getAttribute('name');
+            let value = inputs[i].value;
+            newFriend[key] = value;
+        }
+    
+        if (newFriend.fname === "" || newFriend.lname === "" || newFriend.email === "") {
+            addFriendForm.className = "add-friend-offscreen";
+            return; // STOP HERE
+        }
+    
+        const newFriendData = new Parse.Object('Friends');
+        newFriendData.set('fname', newFriend.fname);
+        newFriendData.set('lname', newFriend.lname);
+        newFriendData.set('email', newFriend.email);
+        newFriendData.set('facebook', newFriend.facebook);
+        newFriendData.set('twitter', newFriend.twitter);
+        newFriendData.set('instagram', newFriend.instagram);
+        newFriendData.set('linkedin', newFriend.linkedin);
+    
+        try {
+            const result = await newFriendData.save();
+            console.log('friend created', result);
+            resetFormFields();
+            addFriendForm.className = "add-friend-offscreen";
+            friendList.innerHTML = '';
+            displayFriends();
+        } catch (error) {
+            console.error('error while creating friend: ', error);
+        }
+    }
+
+    function resetFormFields(){
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("fbook").value = "";
+        document.getElementById("twitter").value = "";
+        document.getElementById("insta").value = "";
+        document.getElementById("linkedin").value = "";
     }
 
     
