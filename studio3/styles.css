@@ -11,12 +11,12 @@ html, body {
 
 }
 
-#resultsScreen {
+/* #resultsScreen {
     display:none;
-}
+} */
 
 #inputScreen {
-    display:block;
+    /* display:block; */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -70,7 +70,7 @@ input::placeholder {
     text-align:center;
 }
 
-button {
+#submit {
     border-radius: 8px;
     background: rgba(229, 100, 224, 0.42);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.49);
@@ -83,7 +83,18 @@ button {
     cursor:pointer;
 }
 
-button:hover {
+#return {
+    position:absolute;
+    cursor:pointer;
+    right:30px;
+    top:30px;
+    background-color:#F2F0D1;
+    border: 1px solid black;
+    border-radius: 8px;
+    z-index:2;
+}
+
+#submit:hover, #return:hover {
     background:black;
     color:#F2F0D1;
 }
@@ -150,4 +161,10 @@ footer a {
 .hidden {
     opacity:0;
     pointer-events:none;
+    visibility:hidden;
+    position:absolute;
+}
+
+.grained {
+    pointer-events: none;
 }

@@ -65,6 +65,8 @@
     
       try {
         await myData.save();
+        localStorage.setItem("hasSubmitted", "true");
+        localStorage.setItem("submissionId", myData.id);
         
         showResultsScreen();
         loadTexts();
@@ -80,7 +82,16 @@
     };
 
 
-    window.addEventListener("DOMContentLoaded", loadTexts);
+    window.addEventListener("DOMContentLoaded", async function () {
+
+      const hasSubmitted = localStorage.getItem("hasSubmitted");
+    
+      if (hasSubmitted === "true") {
+        showResultsScreen();
+      }
+    
+      await loadTexts();
+    });
 
 
     async function loadTexts() {
@@ -148,16 +159,13 @@
     }
 
     function showResultsScreen() {
-      document.getElementById("inputScreen").style.display = "none";
-      document.getElementById("resultsScreen").style.display = "block";
+      const inputScreen = document.getElementById("inputScreen");
+      const resultsScreen = document.getElementById("resultsScreen");
 
-     
       inputScreen.classList.add("hidden");
 
-     
-      setTimeout(function () {
-        resultsScreen.classList.remove("hidden");
-      }, 500); 
+      resultsScreen.classList.remove("hidden");
+
     }
 
     //shuffling order of appearance of the array
@@ -168,6 +176,21 @@
       }
       return array;
     }
+
+    window.resetSubmission = function () {
+      localStorage.removeItem("hasSubmitted");
+      localStorage.removeItem("submissionId");
+
+      const inputScreen = document.getElementById("inputScreen");
+      const resultsScreen = document.getElementById("resultsScreen");
+
+      resultsScreen.classList.add("hidden");
+
+      inputScreen.classList.remove("hidden");
+
+      document.getElementById("textInput").value = "";
+      document.getElementById("categorySelect").value = "";
+    };
 
     
 

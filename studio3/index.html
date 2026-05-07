@@ -48,7 +48,7 @@
         </div>
         
 
-        <button class="item" onclick="saveText()">submit</button>
+        <button id="submit" class="item" onclick="saveText()">submit</button>
         <p id="psa">*responses are reviewed for approval first*</p>
     </section>
 
@@ -56,7 +56,8 @@
     <div id="container">
         <div class="grained"></div>
         <div id="resultsScreen" class="screen hidden">
-            <p id="hint">circles are in no particular order and have a random size<br>scroll through to see what other people are thinking about :)</p>
+            <p id="hint">circles are in no particular order and have a random size<br>scroll through to see what other people are thinking about</p>
+            <button id="return" type="button" onclick="resetSubmission()">return</button>
             <div id="gallery"></div>
         </div>
         
