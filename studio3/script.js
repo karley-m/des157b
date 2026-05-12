@@ -119,6 +119,7 @@
         const div = document.createElement("div");
         div.className = "circle";
 
+        // Rellax
         const speed = Math.random() * 7 - 3;
         div.setAttribute("data-rellax-speed", speed);
 
