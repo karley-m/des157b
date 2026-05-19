@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feasibility Report</title>
+
+    <!-- Normalize CSS for browser compatability -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <!-- Add link to any google fonts used here -->
+    <link rel="stylesheet" href="https://use.typekit.net/yvx8kgc.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color:antiquewhite;
+            border-radius:20px;
+            width: 800px;
+            padding-left:25px;
+        }
+        
+
+        h1 {
+            font-family: 'rl-horizon';
+            text-align:center;
+        }
+
+        p,ul {
+            font-family: "Darker Grotesque";
+            font-weight:500;
+            font-size:20px;
+            padding-left:25px;
+            padding-right:25px;
+            margin:0;
+        }
+
+        p {
+            text-decoration:underline;
+            background-color:skyblue;
+            display:inline-block;
+            width:fit-content;
+            border-radius:30px;
+            padding-bottom:5px;
+        }
+
+        ul{
+            padding-bottom:20px;
+        }
+
+        a {
+            color:black;
+        }
+
+    </style>
+   
+</head>
+<body>
+
+    <header>
+        <h1>Feasibility Report</h1>
+    </header>
+
+    <section>
+        <p>Features I plan to include:</p>
+        <ul>
+            <li>Seven steps that display 3 to 4 options for each category for the user to choose from.</li>
+            <li>Hover states on each option in each category that defines metrics like scores, impacts, and benefits.</li>
+            <li>A drag and drop canvas to assemble the pieces of the kit.</li>
+            <li>A scrollable "neighborhood" displaying a collection of user's designs.</li>
+        </ul>
+
+        <p>Technologies required to build each:</p>
+        <ul>
+            <li>Capturing user's choices throughout the seven steps with DOM capture and storing the choices in <a href="https://www.back4app.com/">Back4App database</a>.</li>
+            <li><a href="https://tippyjs.bootcss.com/">Tippy.js</a> library for having text appear on hover states for the choices.</li>
+            <li><a href="https://fabricjs.com/">Fabric.js</a> library for creating a canvas that allows users to drag, resize, and rotate the images and be able to save the final image to local downloads.</li>
+        </ul>
+
+        <p>Assessment of these requirements:</p>
+        <ul>
+            <li>I am familiar with Back4App's workflow since I used it with the Library Liberty project. However, since this is for capturing choices instead of strings, I will have to learn new functions within the database.</li>
+            <li>I think working with Tippy.js and Fabric.js will be straightforward.</li>
+        </ul>
+
+        <p>Identifying difficulties:</p>
+        <ul>
+            <li>A difficulty that comes to mind is getting the user's specific options to display on the Fabric.js canvas at the end of the narrative and how to capture the design as a flat image to present in the neighborhood, the very last scene. My best guess at the moment is to capture the choices through Back4App, create a number system that correlates those with images, and furthermore, capture an individual image ID from the canvas to display in the neighborhood.</li>
+        </ul>
+    </section>
+    
+</body>
+</html>
