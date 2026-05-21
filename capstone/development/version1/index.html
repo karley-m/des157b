@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Version 1</title>
+
+    <!-- Normalize CSS for browser compatability -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <!-- Add link to any google fonts used here -->
+    
+
+    <!-- My Styles -->
+    <link href="styles.css" rel="stylesheet">
+
+    <!-- Meta tag for mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+</head>
+<body>
+
+    <!-- loading screen -->
+    <section id="loading">
+        <h1>Welcome to the Climate Home Kit</h1>
+        <button id="begin">Let's Begin</button>
+        <button class="gotoneighborhood">neighborhood</button>
+    </section>
+
+    <!-- brief/context -->
+    <section id="intro" class="hidden">
+        <p>sears intro</p>
+        <p>letter</p>
+        <p>disclaimer</p>
+        <button id="gotostep1">start</button>
+    </section>
+
+    <!-- step 1 -->
+    <section id="step1" class="hidden">
+        <h2>step 1: location</h2>
+        <img src="images/dry.png" class="choice" data-category="climate" data-value="dry" data-base="dry" data-image="images/dry.png" width="300">
+        <p>dry</p>
+        <img src="images/temperate.png" class="choice" data-category="climate" data-value="temperate" data-base="temperate" width="300">
+        <p>temperate</p>
+        <img src="images/tropical.png" class="choice" data-category="climate" data-value="tropical" data-base="tropical" width="300">
+        <p>tropical</p>
+        <button id="gotostep2">next</button>
+    </section>
+
+    <!-- step 2 -->
+    <section id="step2" class="hidden">
+        <h2>step 2: shape</h2>
+        <img src="images/barn-temperate.PNG" class="choice" data-category="shape" data-value="barn" data-base="barn" data-image="images/barn-temperate.PNG" width="300">
+        <p>barn-type</p>
+        <img src="images/placer.png" width="300">
+        <p>dome</p>
+        <img src="images/placer.png" width="300">
+        <p>container/modular</p>
+        <img src="images/placer.png" width="300">
+        <p>biomimetic curve</p>
+        <button id="gotostep3">next</button>
+    </section>
+
+    <!-- step 3 -->
+    <section id="step3" class="hidden">
+        <h2>step 3: materiality</h2>
+        <img src="images/mycelium-temperate.png" class="choice" data-category="material" data-value="mycelium" data-base="mycelium" width="300">
+        <p>mycelium</p>
+        <img src="images/placer.png" width="300">
+        <p>bamboo</p>
+        <img src="images/placer.png" width="300">
+        <p>recycled plastics</p>
+        <img src="images/placer.png" width="300">
+        <p>rammed earth</p>
+        <button id="gotostep4">next</button>
+    </section>
+
+    <!-- step 4 -->
+    <section id="step4" class="hidden">
+        <h2>step 4: energy</h2>
+        <img src="images/solar-skin-temperate.png" class="choice" data-category="energy" data-value="solar-skin" data-base="solar-skin" width="300">
+        <p>solar skin roofing</p>
+        <img src="images/placer.png" width="300">
+        <p>wind microturbines</p>
+        <img src="images/placer.png" width="300">
+        <p>micro hydropower</p>
+        <img src="images/placer.png" width="300">
+        <p>passive cooling system</p>
+        <button id="gotostep5">next</button>
+    </section>
+
+    <!-- step 5 -->
+    <section id="step5" class="hidden">
+        <h2>step 5: water sources</h2>
+        <img src="images/placer.png" width="300">
+        <p>rain capture</p>
+        <img src="images/placer.png" width="300">
+        <p>condensate harvesting</p>
+        <img src="images/placer.png" width="300">
+        <p>green roofs</p>
+        <img src="images/placer.png" width="300">
+        <p>greywater recylcing</p>
+        <button id="gotostep6">next</button>
+    </section>
+
+    <!-- step 6 -->
+    <section id="step6" class="hidden">
+        <h2>step 6: food</h2>
+        <img src="images/placer.png" width="300">
+        <p>hydroponic walls</p>
+        <img src="images/placer.png" width="300">
+        <p>algae tanks</p>
+        <img src="images/placer.png" width="300">
+        <p>rooftop gardens</p>
+        <img src="images/placer.png" width="300">
+        <p>mushroom cultivation modules</p>
+        <button id="gotostep7">next</button>
+    </section>
+
+    <!-- step 7 -->
+    <section id="step7" class="hidden">
+        <h2>step 7: social</h2>
+        <img src="images/placer.png" width="300">
+        <p>shared kitchens</p>
+        <img src="images/placer.png" width="300">
+        <p>tool libraries</p>
+        <img src="images/placer.png" width="300">
+        <p>childcare cooperatives</p>
+        <img src="images/placer.png" width="300">
+        <p>communal battery grids</p>
+        <button id="gotoassemble">assemble</button>
+    </section>
+
+    <!-- house assembly -->
+    <section id="assemble" class="hidden">
+        <p>assemble the home</p>
+        <div class="canvas-container">
+            <canvas id="c" width="800" height="600"></canvas>
+        </div>
+        <button id="saveDesign">Save Design</button>
+        <button class="gotoneighborhood">neighborhood</button>
+    </section>
+
+    <!-- neighborhood -->
+    <section id="neighborhood" class="hidden">
+        <p>check out other people's creations</p>
+        <button id="backtohome">back</button>
+    </section>
+    
+
+
+
+
+
+
+    <!-- parse script -->
+    <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+
+    <!-- fabric.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+
+    <!-- My Script -->
+    <script src="script.js" defer></script>
+</body>
+</html>
