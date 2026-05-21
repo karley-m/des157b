@@ -39,7 +39,7 @@
     <!-- step 1 -->
     <section id="step1" class="hidden">
         <h2>step 1: location</h2>
-        <img src="images/dry.png" class="choice" data-category="climate" data-value="dry" data-base="dry" data-image="images/dry.png" width="300">
+        <img src="images/dry.png" class="choice" id="dry" data-category="climate" data-value="dry" data-base="dry" data-image="images/dry.png" data-tippy-content="Tooltip" width="300">
         <p>dry</p>
         <img src="images/temperate.png" class="choice" data-category="climate" data-value="temperate" data-base="temperate" width="300">
         <p>temperate</p>
@@ -160,6 +160,14 @@
     <!-- fabric.js script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
 
+    <!-- gsap script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- tippy js script -->
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.min.js"></script>
+    
     <!-- My Script -->
     <script src="script.js" defer></script>
 </body>

@@ -12,6 +12,7 @@
     const canvas = new fabric.Canvas('c');
 
     const sections = document.querySelectorAll('section');
+    const tl = gsap.timeline();
 
     const selections = {
         location: null,
@@ -23,6 +24,8 @@
         social: null
     };
 
+
+
     function showSection(indexToShow) {
         sections.forEach(function (sec) {
             sec.classList.add('hidden');
@@ -31,7 +34,17 @@
 
         sections[indexToShow].classList.remove('hidden');
         sections[indexToShow].classList.add('show');
+
+        TweenMax.fromTo(sec, 1, {
+            opacity: 0,
+            y: 50
+        }, {
+            opacity: 1,
+            y: 0
+        })
     }
+
+
 
     document.querySelectorAll('.choice').forEach(function (img) {
         img.addEventListener('click',function() {
@@ -59,9 +72,10 @@
         })
     })
 
+
+
     document.querySelector('#begin').addEventListener('click', function(){
         showSection(1);
-        
     });
 
     document.querySelector('#gotostep1').addEventListener('click', function(){
@@ -97,7 +111,10 @@
         renderFabricScene();
     });
 
-    document.querySelector('#saveDesign').addEventListener('click', function () {
+
+
+    // save button
+    document.querySelector('#saveDesign').addEventListener('click', async function () {
 
         // JPG for user download
         const jpgData = canvas.toDataURL({
@@ -109,39 +126,95 @@
         const pngData = canvas.toDataURL({
             format: 'png'
         });
+
+        try {
+            const result = await Parse.Cloud.run('saveDesignPng', {
+                pngData: pngData,
+                selections: selections
+            });
     
-        // JSON for editable scene
-        const jsonData = canvas.toJSON();
-    
-        console.log("PNG for database:", pngData);
-        console.log("JSON:", jsonData);
-    
+            console.log('Saved design:', result);
+        } catch (error) {
+            console.error('Save failed:', error);
+        }
+
         // download JPG locally
         const link = document.createElement('a');
-    
         link.href = jpgData;
         link.download = 'climate-home.jpg';
-    
         document.body.appendChild(link);
-    
         link.click();
-    
         document.body.removeChild(link);
-    
     });
 
-    document.querySelectorAll('.gotoneighborhood').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            showSection(10);
-        })
-        // canvas.loadFromJSON(json, canvas.renderAll.bind(canvas));
-    })
 
+    // neighborhood button
+    document.querySelectorAll('.gotoneighborhood').forEach(function (btn) {
+        btn.addEventListener('click', async function () {
+            showSection(10);
+            await loadDesignIntoNeighborhood();
+        });
+    });
+
+    
+    // create loading screen before displaying neighborhood
+
+
+    async function loadDesignIntoNeighborhood() {
+        
+
+        try {
+            const SavedDesign = Parse.Object.extend("SavedDesign");
+            const query = new Parse.Query(SavedDesign);
+            query.descending("createdAt");
+      
+            const results = await query.find();
+            const items = Array.isArray(results) ? results : Array.from(results || []);
+
+            const neighborhoodSection = document.querySelectorAll("section")[10];
+            if (!neighborhoodSection) return;
+
+            let gallery = neighborhoodSection.querySelector(".design-gallery");
+
+            if(!gallery) {
+                gallery = document.createElement("div");
+                gallery.className = "design-gallery";
+                neighborhoodSection.appendChild(gallery);
+            }
+
+            gallery.innerHTML = "";
+
+            items.forEach(function (item) {
+                const file = item.get("designImage");
+                if (!file) return;
+    
+                const img = document.createElement("img");
+                img.src = file.url();
+                img.alt = "Saved design";
+                img.style.width = "100%";
+                img.style.height = "auto";
+                img.style.display = "block";
+    
+                gallery.appendChild(img);
+            });
+        } catch (error) {
+            console.error("could not load saved desgins:", error);
+        }
+    } 
+
+
+
+
+    // back button
     document.querySelector('#backtohome').addEventListener('click', function(){
         showSection(0);
-
     });
 
+
+
+
+
+    // canvas for fabric.js
     function renderFabricScene() {
 
         canvas.clear();
@@ -151,17 +224,13 @@
         const cellSize = 150;
     
         Object.keys(selections).forEach(function (key, index) {
-    
             const item = selections[key];
-    
             if(item && item.image) {
-    
                 fabric.Image.fromURL(item.image, function (img) {
-    
+
                     // SCALE IMAGE
                     const maxWidth = 120;
                     const maxHeight = 120;
-    
                     const scale = Math.min(
                         maxWidth / img.width,
                         maxHeight / img.height
@@ -172,7 +241,6 @@
                     // GRID POSITION
                     const row = Math.floor(index / itemsPerRow);
                     const col = index % itemsPerRow;
-    
                     const x = padding + (col * cellSize);
                     const y = padding + (row * cellSize);
     
@@ -192,9 +260,23 @@
     }
 
 
+    // tippy js settings
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        const dry = document.querySelector('#dry');
 
+        tippy(dry, {
+            content: 'Tooltip',
+            followCursor: true,
+            maxWidth: 200,
+        })
 
+        dry._tippy.setContent('Drought followed by flash floods. Extreme heatwaves, dust storms, and wildfires.');
+    });
 
-
+    // tippy('#dry', {
+        //     content: 'Tooltip',
+        //     followCursor: true
+        // });
 
 })();
