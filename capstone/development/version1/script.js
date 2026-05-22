@@ -12,10 +12,9 @@
     const canvas = new fabric.Canvas('c');
 
     const sections = document.querySelectorAll('section');
-    const tl = gsap.timeline();
 
     const selections = {
-        location: null,
+        climate: null,
         shape: null,
         material: null,
         energy: null,
@@ -24,6 +23,41 @@
         social: null
     };
 
+    const options = {
+        climate: {
+          dry: {
+            label: "Dry/Arid",
+            shapes: ["barn", "dome", "shell", "cell"]
+          },
+          temperate: {
+            label: "Temperate",
+            shapes: ["barn", "dome", "shell", "cell"]
+          },
+          tropical: {
+            label: "Tropical",
+            shapes: ["barn", "dome", "shell", "cell"]
+          }
+        },
+        shapes: {
+          barn: {
+            label: "Barn",
+            materials: ["mycelium", "plastic", "earth", "bamboo"]
+          },
+          dome: {
+            label: "Dome",
+            materials: ["mycelium", "plastic", "earth", "bamboo"]
+          },
+          shell: {
+            label: "Shell",
+            materials: ["mycelium", "plastic", "earth", "bamboo"]
+          },
+          cell: {
+            label: "Cell",
+            materials: ["mycelium", "plastic", "earth", "bamboo"]
+          }
+        },
+        materials: ["mycelium", "plastic", "earth", "bamboo"]
+      };
 
 
     function showSection(indexToShow) {
@@ -35,7 +69,7 @@
         sections[indexToShow].classList.remove('hidden');
         sections[indexToShow].classList.add('show');
 
-        TweenMax.fromTo(sec, 1, {
+        TweenMax.fromTo(sections[indexToShow], 1, {
             opacity: 0,
             y: 50
         }, {
@@ -44,33 +78,86 @@
         })
     }
 
+    function getImageFilename(shape, material, climate) {
+        return `images/${shape}-${material}-${climate}.png`;
+    }
+    
+    function renderMaterialChoices() {
 
+        const climate = selections.climate?.value;
+        const shape = selections.shape?.value;
+    
+        console.log("Climate:", climate);
+        console.log("Shape:", shape);
+    
+        if (!climate || !shape) return;
+    
+        const container = document.querySelector('#material-options');
+    
+        container.innerHTML = '';
+    
+        options.materials.forEach(function(material) {
+    
+            const imagePath = getImageFilename(shape, material, climate);
+    
+            console.log(imagePath);
+    
+            const wrapper = document.createElement('div');
+    
+            wrapper.innerHTML = `
+                <img 
+                    src="${imagePath}"
+                    class="choice"
+                    data-category="material"
+                    data-value="${material}"
+                    data-image="${imagePath}"
+                    width="300"
+                >
+                <p>${material}</p>
+            `;
+    
+            container.appendChild(wrapper);
+        });
+    
+        attachChoiceListeners();
+    }
 
-    document.querySelectorAll('.choice').forEach(function (img) {
-        img.addEventListener('click',function() {
-            const category = img.dataset.category;
-            const value = img.dataset.value;
+    function attachChoiceListeners() {
 
-            // if (selections[category] !== null) {
-            //     return;
-            // }
+        document.querySelectorAll('.choice').forEach(function(img) {
+    
+            img.removeEventListener('click', handleChoiceClick);
+    
+            img.addEventListener('click', handleChoiceClick);
+        });
+    }
 
-            selections[category] = {
-                value: img.dataset.value,
-                image: img.dataset.image
-            };
+    function handleChoiceClick() {
 
-            console.log(selections);
+        const category = this.dataset.category;
+        const value = this.dataset.value;
 
-            document.querySelectorAll(`.choice[data-category="${category}"]`).forEach(function (el) {
-                el.style.opacity = "0.4";
-                el.style.border = "none";
-            });
+       
+    
+        selections[category] = {
+            value: value,
+            image: this.dataset.image
+        };
+    
+        console.log(selections);
+    
+        document.querySelectorAll(`.choice[data-category="${category}"]`).forEach(function(el) {
+            el.style.opacity = "0.4";
+            el.style.border = "none";
+        });
+    
+        this.style.opacity = "1";
+        this.style.border = "2px solid green";
 
-            img.style.opacity = "1";
-            img.style.border = "2px solid green";
-        })
-    })
+        if(category === "shape") {
+            renderMaterialChoices();
+        }
+    }
 
 
 
@@ -223,14 +310,21 @@
         const itemsPerRow = 4;
         const cellSize = 150;
     
-        Object.keys(selections).forEach(function (key, index) {
+        const filteredSelections = Object.keys(selections).filter(function(key) {
+            return key !== "shape";
+        });
+    
+        filteredSelections.forEach(function(key, index) {
+    
             const item = selections[key];
+    
             if(item && item.image) {
-                fabric.Image.fromURL(item.image, function (img) {
-
-                    // SCALE IMAGE
+    
+                fabric.Image.fromURL(item.image, function(img) {
+    
                     const maxWidth = 120;
                     const maxHeight = 120;
+    
                     const scale = Math.min(
                         maxWidth / img.width,
                         maxHeight / img.height
@@ -238,9 +332,9 @@
     
                     img.scale(scale);
     
-                    // GRID POSITION
                     const row = Math.floor(index / itemsPerRow);
                     const col = index % itemsPerRow;
+    
                     const x = padding + (col * cellSize);
                     const y = padding + (row * cellSize);
     
@@ -273,6 +367,8 @@
 
         dry._tippy.setContent('Drought followed by flash floods. Extreme heatwaves, dust storms, and wildfires.');
     });
+
+    attachChoiceListeners();
 
     // tippy('#dry', {
         //     content: 'Tooltip',
