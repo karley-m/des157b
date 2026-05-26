@@ -1,17 +1,28 @@
+body {
+    margin:auto;
+}
+
 section {
     text-align: center;
 }
 
 #c {
     border: 2px solid black;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .tippy-box {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size:10px;
     padding:10px;
+    background-color: rgba(20,20,20,0.5);
 }
 
+button {
+    margin-bottom:20px;
+}
 
 .canvas-container {
     display: flex;
@@ -34,3 +45,65 @@ section {
 .show {
     display:block;
 }
+
+@media (min-width: 768px) {
+
+    /* SECTION LAYOUT */
+    section {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    section h2 {
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+  
+    /* OPTIONS ROW LAYOUT */
+    #material-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        flex: 1 1 160px;
+        max-width: 260px;
+    }
+
+    .option img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .option p {
+        margin-top: 8px;
+    }
+  
+    .choice {
+      width: clamp(120px, 12vw, 260px);
+    }
+  
+    /* NEIGHBORHOOD GRID */
+    .design-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+  }

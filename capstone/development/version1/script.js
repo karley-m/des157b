@@ -9,6 +9,17 @@
     console.log("Parse object:", Parse);
     console.log("Parse initialized:", Parse.applicationId);
 
+    let tooltipData = {};
+
+    async function loadTooltipData() {
+    
+        const response = await fetch('data.json');
+    
+        tooltipData = await response.json();
+    
+        console.log(tooltipData);
+    }
+
     const canvas = new fabric.Canvas('c');
 
     const sections = document.querySelectorAll('section');
@@ -27,18 +38,18 @@
         climate: {
           dry: {
             label: "Dry/Arid",
-            shapes: ["barn", "dome", "shell", "cell"]
+            shape: ["barn", "dome", "shell", "cell"]
           },
           temperate: {
             label: "Temperate",
-            shapes: ["barn", "dome", "shell", "cell"]
+            shape: ["barn", "dome", "shell", "cell"]
           },
           tropical: {
             label: "Tropical",
-            shapes: ["barn", "dome", "shell", "cell"]
+            shape: ["barn", "dome", "shell", "cell"]
           }
         },
-        shapes: {
+        shape: {
           barn: {
             label: "Barn",
             materials: ["mycelium", "plastic", "earth", "bamboo"]
@@ -58,6 +69,37 @@
         },
         materials: ["mycelium", "plastic", "earth", "bamboo"]
       };
+
+    const assetMap = {
+        cat: "images/cat.png",
+        couch: "images/couch.png",
+        dog: "images/dog.png",
+        tree: "images/tree.png",
+        bike: "images/bike.png"
+    };
+
+      function showError(errorId, message) {
+        const errorBox = document.getElementById(errorId);
+        if (errorBox) {
+            errorBox.innerHTML = message;
+        }
+    }
+    
+    function clearError(errorId) {
+        const errorBox = document.getElementById(errorId);
+        if (errorBox) {
+            errorBox.innerHTML = '';
+        }
+    }
+
+    function validateSelection(category, errorId) {
+        if (!selections[category]) {
+            showError(errorId, `Please choose one for ${category} before moving on.`);
+            return false;
+        }
+        clearError(errorId);
+        return true;
+    }
 
 
     function showSection(indexToShow) {
@@ -83,27 +125,17 @@
     }
     
     function renderMaterialChoices() {
-
         const climate = selections.climate?.value;
         const shape = selections.shape?.value;
-    
         console.log("Climate:", climate);
         console.log("Shape:", shape);
-    
         if (!climate || !shape) return;
-    
         const container = document.querySelector('#material-options');
-    
         container.innerHTML = '';
-    
         options.materials.forEach(function(material) {
-    
             const imagePath = getImageFilename(shape, material, climate);
-    
             console.log(imagePath);
-    
             const wrapper = document.createElement('div');
-    
             wrapper.innerHTML = `
                 <img 
                     src="${imagePath}"
@@ -120,14 +152,72 @@
         });
     
         attachChoiceListeners();
+        setTimeout(() => {
+            setupTooltips();
+        }, 0);
     }
 
-    function attachChoiceListeners() {
 
+
+    function renderSolarChoices() {
+        const shape = selections.shape?.value;
+        if (!shape) return;
+        const container = document.querySelector('#solar-options');
+        container.innerHTML = '';
+        const imagePath = `images/solar-${shape}.png`;
+        const wrapper = document.createElement('div');
+    
+        wrapper.innerHTML = `
+            <img
+                src="${imagePath}"
+                class="choice"
+                data-category="energy"
+                data-value="solar-skin"
+                data-image="${imagePath}"
+                width="300"
+            >
+
+        `;
+    
+        container.appendChild(wrapper);
+        attachChoiceListeners();
+        setTimeout(() => {
+            setupTooltips();
+        }, 0);
+    }
+
+    function renderGreenRoofChoices() {
+        const shape = selections.shape?.value;
+        const climate = selections.climate?.value;
+        if (!shape || !climate) return;
+        const container = document.querySelector('#greenroof-options');
+        container.innerHTML = '';
+        const imagePath = `images/garden-${shape}-${climate}.png`;
+        const wrapper = document.createElement('div');
+    
+        wrapper.innerHTML = `
+            <img
+                src="${imagePath}"
+                class="choice"
+                data-category="water"
+                data-value="green-roof"
+                data-image="${imagePath}"
+                width="300"
+            >
+            
+        `;
+    
+        container.appendChild(wrapper);
+        attachChoiceListeners();
+        setTimeout(() => {
+            setupTooltips();
+        }, 0);
+    }
+
+
+    function attachChoiceListeners() {
         document.querySelectorAll('.choice').forEach(function(img) {
-    
             img.removeEventListener('click', handleChoiceClick);
-    
             img.addEventListener('click', handleChoiceClick);
         });
     }
@@ -170,30 +260,45 @@
     });
 
     document.querySelector('#gotostep2').addEventListener('click', function(){
+        if (!validateSelection('climate','error-step1')) return;
         showSection(3);
     });
 
     document.querySelector('#gotostep3').addEventListener('click', function(){
+        if (!validateSelection('shape','error-step2')) return;
+        clearError();
         showSection(4);
+        renderSolarChoices();
     });
 
     document.querySelector('#gotostep4').addEventListener('click', function(){
+        if (!validateSelection('material','error-step3')) return;
+        clearError();
         showSection(5);
+        renderGreenRoofChoices();
     });
 
     document.querySelector('#gotostep5').addEventListener('click', function(){
+        if (!validateSelection('energy','error-step4')) return;
+        clearError();
         showSection(6);
     });
 
     document.querySelector('#gotostep6').addEventListener('click', function(){
+        if (!validateSelection('water','error-step5')) return;
+        clearError();
         showSection(7);
     });
 
     document.querySelector('#gotostep7').addEventListener('click', function(){
+        if (!validateSelection('food','error-step6')) return;
+        clearError();
         showSection(8);
     });
 
     document.querySelector('#gotoassemble').addEventListener('click', function(){
+        if (!validateSelection('social','error-step7')) return;
+        clearError();
         showSection(9);
         renderFabricScene();
     });
@@ -244,12 +349,10 @@
     });
 
     
-    // create loading screen before displaying neighborhood
+    // TODO: create loading screen before displaying neighborhood
 
 
     async function loadDesignIntoNeighborhood() {
-        
-
         try {
             const SavedDesign = Parse.Object.extend("SavedDesign");
             const query = new Parse.Query(SavedDesign);
@@ -297,8 +400,30 @@
         showSection(0);
     });
 
+    function getLayoutConfig() {
+        const isMobile = window.innerWidth < 768;
+    
+        return {
+            padding: isMobile ? 10 : 20,
+            cellSize: isMobile ? 90 : 150,
+            itemsPerRow: isMobile ? 2 : 4,
+            maxIconSize: isMobile ? 70 : 120
+        };
+    }
 
+    function resizeCanvas() {
+        const isMobile = window.innerWidth < 768;
+    
+        const width = isMobile ? window.innerWidth - 20 : 800;
+        const height = isMobile ? 400 : 600;
+    
+        canvas.setWidth(width);
+        canvas.setHeight(height);
+    
+        canvas.calcOffset(); // important for correct mouse/touch alignment
+    }
 
+    
 
 
     // canvas for fabric.js
@@ -306,9 +431,7 @@
 
         canvas.clear();
     
-        const padding = 20;
-        const itemsPerRow = 4;
-        const cellSize = 150;
+        const layout = getLayoutConfig();
     
         const filteredSelections = Object.keys(selections).filter(function(key) {
             return key !== "shape";
@@ -318,61 +441,158 @@
     
             const item = selections[key];
     
-            if(item && item.image) {
+            if (item && item.image) {
     
                 fabric.Image.fromURL(item.image, function(img) {
     
-                    const maxWidth = 120;
-                    const maxHeight = 120;
+                    // const row = Math.floor(index / layout.itemsPerRow);
+                    // const col = index % layout.itemsPerRow;
     
-                    const scale = Math.min(
-                        maxWidth / img.width,
-                        maxHeight / img.height
-                    );
+                    // const x = layout.padding + (col * layout.cellSize);
+                    // const y = layout.padding + (row * layout.cellSize);
+
+                    img.scaleToWidth(layout.maxIconSize);
     
-                    img.scale(scale);
-    
-                    const row = Math.floor(index / itemsPerRow);
-                    const col = index % itemsPerRow;
-    
-                    const x = padding + (col * cellSize);
-                    const y = padding + (row * cellSize);
-    
-                    img.set({
-                        left: x,
-                        top: y,
-                        selectable: true,
-                        hasControls: true
-                    });
+                    // img.set({
+                    //     left: x,
+                    //     top: y,
+                    //     selectable: true,
+                    //     hasControls: true
+                    // });
     
                     canvas.add(img);
-                    canvas.renderAll();
-    
+                    // canvas.renderAll();
+                    loaded++;
+                    if(loaded === total) {
+                        positionObjects();
+                    }
+                    
                 });
             }
         });
     }
 
+    function positionObjects() {
 
-    // tippy js settings
-    document.addEventListener('DOMContentLoaded', function () {
-        
-        const dry = document.querySelector('#dry');
+        const layout = getLayoutConfig();
+        const objects = canvas.getObjects();
+    
+        objects.forEach(function(obj, index) {
+    
+            const row = Math.floor(index / layout.itemsPerRow);
+            const col = index % layout.itemsPerRow;
+    
+            obj.set({
+                left: layout.padding + col * layout.cellSize,
+                top: layout.padding + row * layout.cellSize,
+                originX: 'left',
+                originY: 'top'
+            });
+    
+            obj.setCoords();
+        });
+    
+        canvas.renderAll();
+    }
 
-        tippy(dry, {
-            content: 'Tooltip',
-            followCursor: true,
-            maxWidth: 200,
-        })
-
-        dry._tippy.setContent('Drought followed by flash floods. Extreme heatwaves, dust storms, and wildfires.');
+    window.addEventListener('resize', function() {
+        resizeCanvas();
+        renderFabricScene();
     });
 
-    attachChoiceListeners();
+    document.querySelectorAll('.add-item').forEach(btn => {
+        btn.addEventListener('click', function() {
+    
+            const type = this.dataset.item;
+            const url = assetMap[type];
+    
+            fabric.Image.fromURL(url, function(img) {
+    
+                img.set({
+                    left: 100,
+                    top: 100,
+                    selectable: true,
+                    hasControls: true
+                });
+    
+                img.scaleToWidth(80);
+    
+                canvas.add(img);
+                canvas.setActiveObject(img);
+            });
+        });
+    });
 
-    // tippy('#dry', {
-        //     content: 'Tooltip',
-        //     followCursor: true
-        // });
+    loadTooltipData();
+
+    function setupTooltips() {
+        document.querySelectorAll('.choice').forEach(function(item) {
+            if (item._tippy) return;
+            const category = item.dataset.category;
+            const value = item.dataset.value;
+            if (!category || !value) return;
+            const data = tooltipData?.[category]?.[value];
+            if (!data) return;
+            console.log("tooltips initialized for:", document.querySelectorAll('.choice').length);
+
+            let compatibilityHTML = '';
+
+            if (data.compatibility) {
+
+            compatibilityHTML = `
+                <div class="compatibility-chart">
+                <div>Dry ${getCompatibilityDot(data.compatibility.dry)}</div>
+                <div>Temperate ${getCompatibilityDot(data.compatibility.temperate)}</div>
+                <div>Tropical ${getCompatibilityDot(data.compatibility.tropical)}</div>
+                </div>
+                `;
+            }
+
+            const content = `
+                <div class="tooltip-content">
+                    <p>${data.description}</p>
+                    ${compatibilityHTML}
+                </div>
+                `;
+    
+            tippy(item, {
+                content: content,
+                allowHTML: true,
+                maxWidth: 250,
+                followCursor:true
+            });
+        });
+    }
+
+    function getCompatibilityDot(score) {
+
+        const colors = [
+            '#ff4d4d',
+            '#ffd24d',
+            '#9be564',
+            '#2ecc71'
+        ];
+    
+        return `
+            <span style="
+                display:inline-block;
+                width:12px;
+                height:12px;
+                border-radius:50%;
+                background:${colors[score]};
+                margin-left:6px;
+            "></span>
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', async function () {
+        await loadTooltipData();
+        setupTooltips();
+    });
+        
+
+    attachChoiceListeners();
+    setupTooltips();
+
 
 })();
