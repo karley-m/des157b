@@ -1,0 +1,153 @@
+body {
+    margin:auto;
+}
+
+section {
+    text-align: center;
+}
+
+#c {
+    border: 2px solid black;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tippy-box {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:10px;
+    padding:10px;
+    background-color: rgba(20,20,20,0.5);
+}
+
+button {
+    margin-bottom:20px;
+}
+
+img:hover {
+    cursor:pointer;
+}
+
+#intro1,
+#intro2 {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#intro1 p,
+#intro2 p {
+    position: absolute;
+    width: 70%;
+    max-width: 800px;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+#intro1 button,
+#intro2 button {
+    position: absolute;
+    bottom: 60px;
+    opacity: 0;
+}
+
+#gotostep1 {
+    left: 50%;
+    transform: translateX(-120%);
+}
+
+.gotoneighborhood {
+    left: 50%;
+    transform: translateX(20%);
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;
+}
+
+.design-gallery {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px));
+    gap: 12px;
+    width: 100%;
+}
+
+.hidden {
+    display:none;
+}
+
+.show {
+    display:block;
+}
+
+@media (min-width: 768px) {
+
+    section {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+  
+    section h2 {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 10;
+    }
+  
+    #material-options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin: auto;
+    }
+
+    .option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        flex: 1 1 160px;
+        max-width: 260px;
+    }
+
+    .option img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .option p {
+        margin-top: 8px;
+    }
+  
+    .choice {
+        width: clamp(120px, 12vw, 260px);
+    }
+  
+    .design-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+  }
