@@ -147,6 +147,7 @@
                     data-image="${imagePath}"
                     width="300"
                 >
+                <p>${material}</p>
                 `;
     
             container.appendChild(wrapper);
