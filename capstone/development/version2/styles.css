@@ -6,22 +6,64 @@ section {
     text-align: center;
 }
 
+#intro1 p, #intro2 p {
+    font-family: "Pompiere";
+}
+
+h2 {
+    font-family: "Pompiere";
+}
+
+p {
+    font-family: "Nunito";
+}
+
+.error {
+    font-family: "Nunito";
+    margin:5px;
+}
+
 #c {
     border: 2px solid black;
     max-width: 100%;
     height: auto;
     display: block;
+    background:white;
+    background-image: url("images/landscape-mobile.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .tippy-box {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: "Nunito";
     font-size:10px;
-    padding:10px;
+    padding:7px;
     background-color: rgba(20,20,20,0.5);
 }
 
 button {
     margin-bottom:20px;
+    font-family: "Nunito";
+    padding:15px;
+    background-color:rgb(44, 44, 44);
+    color:white;
+}
+
+button:hover {
+    background-color:white;
+    color:black;
+    cursor:pointer;
+}
+
+.additional button {
+    padding:5px;
+    background-color:beige;
+    color:black;
+}
+
+.additional button:hover {
+    background-color:skyblue;
 }
 
 img:hover {
@@ -58,10 +100,10 @@ img:hover {
     opacity: 0;
 }
 
-#gotostep1 {
+/* #gotostep1 {
     left: 50%;
     transform: translateX(-120%);
-}
+} */
 
 .gotoneighborhood {
     left: 50%;
@@ -70,9 +112,8 @@ img:hover {
 
 .canvas-container {
     display: flex;
-    justify-content: center; 
-    align-items: center;     
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .design-gallery {
@@ -96,13 +137,20 @@ img:hover {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        align-content:center;
       }
   
     section h2 {
         position: sticky;
         top: 0;
         background: white;
-        z-index: 10;
+    }
+
+    #assemble p {
+        margin:10px;
+        text-align:center;
+        width:600px;
+        margin:auto;
     }
   
     #material-options {
@@ -112,6 +160,42 @@ img:hover {
         gap: 20px;
         align-items: flex-start;
     }
+
+    #c {
+        background:white;
+        background-image: url("images/landscape.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .canvas-container {
+        height: 90vh;
+    }
+
+    /* .assemble-layout {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 30px;
+        padding: 40px;
+    }
+
+    .canvas-container {
+        flex-shrink: 0;
+    }
+
+    .additional-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .additional {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    } */
 
     .options {
         display: flex;
@@ -126,8 +210,8 @@ img:hover {
         display: flex;
         flex-direction: column;
         align-items: center;
+        align-self:end;
         text-align: center;
-        flex: 1 1 160px;
         max-width: 260px;
     }
 
@@ -141,13 +225,13 @@ img:hover {
         margin-top: 8px;
     }
   
-    .choice {
+    /* .choice {
         width: clamp(120px, 12vw, 260px);
-    }
+    } */
   
     .design-gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         gap: 15px;
     }
   }

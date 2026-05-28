@@ -9,7 +9,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
 
     <!-- Add link to any google fonts used here -->
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pompiere&display=swap" rel="stylesheet">
 
     <!-- My Styles -->
     <link href="styles.css" rel="stylesheet">
@@ -34,16 +36,18 @@
     <!-- brief/context -->
     <section id="intro2" class="hidden">
         <p>In the early 1900s, entire homes could be ordered from a catalog and assembled by me and you.</p>
-        <p>Parts arrived by rail, instructions arrived on paper. Many of those homes still stand today</p>
+        <p>Parts arrived by rail, instructions arrived on paper. Many of those homes still stand today.</p>
         <p>The future of housing may not be about building bigger or more permanent homes. It may be about building homes that repsond better to the places they exist in.</p>
         <p>Build a home kit designed for its environment with some alternative, sustainable parts.</p>
-        <button id="gotostep1">start</button>
-        <button class="gotoneighborhood">neighborhood</button>
+
+        <button id="gotostep1">Start</button>
+        <!-- <button class="gotoneighborhood">Neighborhood</button> -->
     </section>
 
     <!-- step 1 -->
     <section id="step1" class="hidden">
-        <h2>step 1: location</h2>
+        <h2>Step 1</h2>
+        <p>Which climate will you live in? Hover over the options to read more.</p>
         <div class="options">
             <div class="option">
                 <img src="images/dry.png" class="choice" id="dry" data-category="climate" data-value="dry" width="300">
@@ -67,8 +71,8 @@
 
     <!-- step 2 -->
     <section id="step2" class="hidden">
-        <h2>step 2: shape</h2>
-
+        <h2>Step 2</h2>
+        <p>Which shape house will you choose?</p>
         <div class="options">
             <div class="option">
                 <img src="images/barn.PNG" class="choice" data-category="shape" data-value="barn" data-base="barn" data-image="images/barn.PNG" width="300">
@@ -97,7 +101,8 @@
 
     <!-- step 3 -->
     <section id="step3" class="hidden">
-        <h2>step 3: materiality</h2>
+        <h2>Step 3</h2>
+        <p>What material will you make the house out of?</p>
         <div id="material-options"></div>
         <div id="error-step3" class="error"></div>
         <button id="gotostep4">next</button>
@@ -105,7 +110,8 @@
 
     <!-- step 4 -->
     <section id="step4" class="hidden">
-        <h2>step 4: energy</h2>
+        <h2>Step 4</h2>
+        <p>What kind of energy will you harvest for your home?</p>
         <div class="options">
             <div class="option">
                 <div id="solar-options"></div>
@@ -134,7 +140,8 @@
 
     <!-- step 5 -->
     <section id="step5" class="hidden">
-        <h2>step 5: water sources</h2>
+        <h2>Step 5</h2>
+        <p>What kind of system will you set up to capture water?</p>
         <div class="options">
             <div class="option">
                 <img src="images/raincapture.png" class="choice" data-category="water" data-value="rain-capture" data-base="rain-capture" data-image="images/raincapture.png" width="300">
@@ -165,7 +172,8 @@
 
     <!-- step 6 -->
     <section id="step6" class="hidden">
-        <h2>step 6: food</h2>
+        <h2>Step 6</h2>
+        <p>What kind of food system will you add?</p>
         <div class="options">
             <div class="option">
                 <img src="images/hydroponic.png" class="choice" data-category="food" data-value="hydroponic" data-base="hydroponic" data-image="images/hydroponic.png" width="300">
@@ -178,7 +186,7 @@
             </div>
 
             <div class="option">
-                <img src="images/vegetables.png" class="choice" data-category="food" data-value="rooftop-gardens" data-base="rooftop-gardens" data-image="images/vegetables.png" width="300">
+                <div id="garden-options"></div>
                 <p>rooftop gardens</p>
             </div>
 
@@ -188,13 +196,14 @@
             </div>
         </div>
         
-        <div cid="error-step6" lass="error"></div>
+        <div id="error-step6" class="error"></div>
         <button id="gotostep7">next</button>
     </section>
 
     <!-- step 7 -->
     <section id="step7" class="hidden">
-        <h2>step 7: social</h2>
+        <h2>Step 7</h2>
+        <p>What addition will you add to strengthen your community?</p>
         <div class="options">
             <div class="option">
                 <img src="images/pantry.png" class="choice" data-category="social" data-value="shared-kitchen" data-base="shared-kitchen" data-image="images/pantry.png" width="300">
@@ -218,31 +227,40 @@
         </div>
         
         <div id="error-step7" class="error"></div>
-        <button id="gotoassemble">assemble</button>
+        <button id="gotoassemble">Finished</button>
     </section>
 
     <!-- house assembly -->
     <section id="assemble" class="hidden">
-        <p>assemble the home</p>
-        <div class="canvas-container">
-            <canvas id="c" width="800" height="600"></canvas>
+        <h2>Time to assemble your home!</h2>
+        <p>Drag each piece and arrange the items to your desire. Make sure to have your home in the center and have it fill up majority of the canvas. When you're done, first click save and then check out other creations in the neghborhood.</p>
+        
+        <di class="assemble-layout">
+            <div class="canvas-container">
+                <canvas id="c" width="800" height="600"></canvas>
+            </div>
+    
+            <div class="additional-wrapper">
+                <p>Additional items:</p>
+                <div class="additional">
+                    <button class="add-item" data-item="cat">Cat</button>
+                    <button class="add-item" data-item="dog">Dog</button>
+                    <button class="add-item" data-item="couch">Couch</button>
+                    <button class="add-item" data-item="tree">Tree</button>
+                    <button class="add-item" data-item="bike">Bike</button>
+                </div>
+            </div>
         </div>
-        <p>add more items</p>
-        <div class="additional">
-            <button class="add-item" data-item="cat">Cat</button>
-            <button class="add-item" data-item="dog">Dog</button>
-            <button class="add-item" data-item="couch">Couch</button>
-            <button class="add-item" data-item="tree">Tree</button>
-            <button class="add-item" data-item="bike">Bike</button>
-        </div>
+        
+        
         <button id="saveDesign">Save Design</button>
-        <button class="gotoneighborhood">neighborhood</button>
+        <button class="gotoneighborhood">Neighborhood</button>
     </section>
 
     <!-- neighborhood -->
     <section id="neighborhood" class="hidden">
-        <p>check out other people's creations</p>
-        <button id="backtohome">back</button>
+        <h2>Check out other people's creations.</h2>
+        <button id="backtohome">Back to Home</button>
     </section>
     
 

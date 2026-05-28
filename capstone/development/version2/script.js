@@ -215,6 +215,35 @@
         }, 0);
     }
 
+    function renderGardenChoices() {
+        const shape = selections.shape?.value;
+        if (!shape) return;
+        const container = document.querySelector('#garden-options');
+        container.innerHTML = '';
+        const imagePath = `images/vegetables-${shape}.png`;
+        const wrapper = document.createElement('div');
+        console.log("renderGardenChoices fired");
+        console.log("shape:", shape);
+        console.log("path:", imagePath);
+    
+        wrapper.innerHTML = `
+            <img
+                src="${imagePath}"
+                class="choice"
+                data-category="food"
+                data-value="garden"
+                data-image="${imagePath}"
+                width="300"
+            > 
+            `;
+    
+        container.appendChild(wrapper);
+        attachChoiceListeners();
+        setTimeout(() => {
+            setupTooltips();
+        }, 0);
+    }
+
 
     function attachChoiceListeners() {
         document.querySelectorAll('.choice').forEach(function(img) {
@@ -241,7 +270,7 @@
         });
     
         this.style.opacity = "1";
-        this.style.border = "2px solid green";
+        this.style.border = "2px dashed green";
 
         if(category === "shape") {
             renderMaterialChoices();
@@ -332,6 +361,7 @@
         if (!validateSelection('water','error-step5')) return;
         clearError();
         showSection(7);
+        renderGardenChoices();
     });
     
     // -------------- going to social screen ------------------
@@ -352,16 +382,26 @@
     // // -------------- save button ------------------
     document.querySelector('#saveDesign').addEventListener('click', async function () {
 
+        const originalBg = canvas.backgroundColor;
+        canvas.backgroundColor = "white";
+        canvas.renderAll();
+
         //jpg for user download
         const jpgData = canvas.toDataURL({
             format: 'jpeg',
-            quality: 0.9
+            quality: 1
         });
+
+        canvas.backgroundColor = null;
+        canvas.renderAll();
     
         //png for back4app
         const pngData = canvas.toDataURL({
             format: 'png'
         });
+
+        canvas.backgroundColor = originalBg;
+        canvas.renderAll();
 
         try {
             const result = await Parse.Cloud.run('saveDesignPng', {
@@ -512,42 +552,33 @@
     // -------------- canvas for fabric.js ------------------
     function renderFabricScene() {
         canvas.clear();
+    
         const layout = getLayoutConfig();
-
+    
         const filteredSelections = Object.keys(selections).filter(function(key) {
-            return key !== "shape";
+            return key !== "shape" && selections[key]?.image;
         });
     
-        filteredSelections.forEach(function(key, index) {
+        const total = filteredSelections.length;
+        let loaded = 0;
+    
+        filteredSelections.forEach(function(key) {
+    
             const item = selections[key];
     
-            if (item && item.image) {
-                fabric.Image.fromURL(item.image, function(img) {
+            fabric.Image.fromURL(item.image, function(img) {
     
-                    // const row = Math.floor(index / layout.itemsPerRow);
-                    // const col = index % layout.itemsPerRow;
+                img.scaleToWidth(layout.maxIconSize);
     
-                    // const x = layout.padding + (col * layout.cellSize);
-                    // const y = layout.padding + (row * layout.cellSize);
-
-                    img.scaleToWidth(layout.maxIconSize);
+                canvas.add(img);
     
-                    // img.set({
-                    //     left: x,
-                    //     top: y,
-                    //     selectable: true,
-                    //     hasControls: true
-                    // });
+                loaded++;
     
-                    canvas.add(img);
-                    // canvas.renderAll();
-                    loaded++;
-                    if(loaded === total) {
-                        positionObjects();
-                    }
-                    
-                });
-            }
+                if (loaded === total) {
+                    positionObjects();
+                }
+    
+            });
         });
     }
 
