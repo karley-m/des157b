@@ -1,32 +1,8 @@
-/* CSS Resets */
-* {
-    box-sizing: border-box;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-    height: auto;
-}
-
 body {
     background-image:url(images/phoneBG.jpg);
+    text-align:center;
     background-color: #07375D;
     color:#E4FAC9;
-}
-
-body.switch {
-    background-color: #07375D;
-    color: #333;
-}
-
-#container {
-    position: relative;
-    width: 100%;
-    max-width: 1366px;
-    min-width: 900px;
-    margin: 1em auto;
-    padding-top: 2em;
 }
 
 header {
@@ -34,9 +10,32 @@ header {
     margin:auto;
 }
 
+#container {
+    margin:auto;
+}
+
+main ol,main ul {
+    padding-left:0;
+    margin:10px;
+}
+
+main {
+    background-image: linear-gradient(to bottom,rgb(139, 146, 46),rgba(139, 146, 46,0));
+    border-radius: 20px;
+    margin:10px;
+}
+
 h2{
     background-color:#E4FAC9;
     color:#8B922E;
+    margin:10px;
+}
+
+h3 {
+    color:#E4FAC9;
+    font-family: 'rl-horizon';
+    text-align:left;
+    padding:10px;
 }
 
 h2.switch {
@@ -48,62 +47,111 @@ h1.switch {
     color:#FFBA0D;
 }
 
-main {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 1em auto;
+
+section li.switch {
+    background-color: #FFBA0D;
 }
 
-main section {
-    margin: 0 .25em;
-    padding: 1em;
+section ul,
+section ol {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+}
+
+section li {
+    display: flex;
+    align-items: center;   /* vertical centering */
+    justify-content:center;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: #FFBA0D;
+    border-radius: 10px;
+    padding: 12px 0 12px 35%;
+}
+
+main.switch {
+    background-image: linear-gradient(to bottom,rgba(224, 203, 108, 0.7),rgba(224, 189, 106, 0.1));
+}
+
+body.switch {
+    background-image:url(images/phoneBG-night.png);
+}
+
+nav ol, nav ul {
+    list-style-type: none;
+    text-align:left;
 }
 
 a {
     text-decoration: none;
 }
 
-nav ol, nav ul {
-    list-style-type: none;
-    margin-left: 0;
-    padding-left: 0;
-}
-
 section li {
-    padding-left: 1.2em;
     font-family: "Darker Grotesque";
+    text-align:center;
+    background-color: #E4FAC9;
+    color:#8B922E;
+    padding:10px;
+    padding-left:0;
+    margin:auto;
 }
 
-h3 {
-    color:#E4FAC9;
-    font-family: 'rl-horizon';
+body.switch section li {
+    background-color: #FFBA0D;
+    color:#07375D;
 }
 
-.fa-solid {
-    color: #E4FAC9;
+body.switch section a {
+    background-color: #FFBA0D;
+    color:#07375D;
 }
 
 section a {
-    line-height: 1.1em;
-    display: inline-block;
-    padding: .5em;
-    color: #E4FAC9;
+    color: #8B922E;
 }
 
 section a:hover {
+    color:white;
+}
+
+section li:hover {
     background-color: #07375D;
     color: white;
 }
 
-section.switch a:hover {
-    background-color: #FFBA0D;
-    color: navy;
+.fa-solid {
+    padding-right:10px;
+}
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 20px #fff;
+
+}
+
+button.switch {
+    background-color: transparent;
+    border: none;
+}
+
+button.switch:hover {
+    cursor: pointer;
+    box-shadow: 0 0 20px #fff;
+}
+
+li {
+    padding-top:20px;
+    text-align:left;
+}
+
+ol {
+    text-align:center;
 }
 
 button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     background-color: transparent;
     border: none;
 }
@@ -124,19 +172,39 @@ button.switch:hover {
     box-shadow: 0 0 20px #fff;
 }
 
-
-
-@media only screen and (min-width: 650px) {
+#phrase {
+    text-align:center;
+    font-size:45px;
+    margin:auto;
+    font-family: 'deseo-medium';
+    color:navy;
+    padding-bottom:20px;
+    pointer-events: none;
 }
 
-@media only screen and (min-width: 160px) {
-    body {
-        background-image:url(images/tabletBG.jpg);
-    }
-   
+#phrase p {
+    margin:0;
 }
 
-@media only screen and (min-width: 960px) {
+#phrase p:last-of-type {
+    opacity: 0;
+    display:none;
+}
+
+body.switch #phrase p:last-of-type {
+    opacity: 1;
+    font-family:'rl-horizon';
+    font-size:20px;
+    display:inline;
+}
+
+
+
+
+
+
+/* ----------- macbook -------------- */
+@media (min-width: 768px) {
     body {
         background-image:url(images/macbookBG.jpg);
         background-position: center 100%;
@@ -147,6 +215,12 @@ button.switch:hover {
 
     h1,h2 {
         margin:0;
+    }
+
+    main {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1em auto;
     }
 
     h1{
@@ -163,7 +237,7 @@ button.switch:hover {
     }
 
     #container {
-        width:500px;
+        width:800px;
         margin-right:10px;
         padding-top:170px;
         padding-left:50px;
@@ -209,11 +283,58 @@ button.switch:hover {
         font-size:44px;
     }
 
+    button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: transparent;
+        border: none;
+    }
 
+    section li {
+        background-color:transparent;
+        color:#E4FAC9;
+        text-align:left;
+        align-items:left;
+        justify-content:left;
+    }
 
+    section a {
+        color:#E4FAC9;
+    }
+
+    section.switch li:hover {
+        background-color: #FFBA0D;
+        color: navy;
+    }
+
+    body.switch section li {
+        background-color: transparent;
+        color:#E4FAC9;
+    }
+
+    body.switch section a {
+        background-color: transparent;
+        color:#E4FAC9;
+    }
+
+    body.switch section a:hover {
+        color:#07375D;
+    }
+
+    section ul,
+    section ol {
+        gap:0px;
+    }
 }
 
-@media only screen and (min-width: 1201px) {
+
+
+
+
+
+/* ----------- imac+ -------------- */
+@media (min-width: 1200px) {
     body {
         background-image:url(images/imacBG.jpg);
         
@@ -224,10 +345,22 @@ button.switch:hover {
     }
 
     #container {
-        width:400px;
+        width:800px;
         margin-right:10px;
         padding-top:260px;
         padding-left:150px;
+        position:absolute;
+        bottom:0;
+        right:0;
     }
 
+    main {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1em auto;
+    }
+
+    button {
+        top:90px;
+    }
 }
