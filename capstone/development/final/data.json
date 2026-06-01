@@ -1,0 +1,249 @@
+{
+    "climate": {
+    "dry": {
+      "description": "Drought followed by flash floods. Extreme heatwaves, dust storms, and wildfires."
+    },
+
+    "temperate": {
+      "description": "Moderate rainfall and seasonal variation with balanced temperatures."
+    },
+
+    "tropical": {
+      "description": "High humidity, heavy rainfall, and year-round warmth."
+    }
+  },
+  
+    "shape": {
+      "barn": {
+        "title": "Barn Type",
+        "description": "Simple pitched roof optimized for modular construction.",
+        "compatibility": {
+          "dry": 2,
+          "temperate": 3,
+          "tropical": 1
+        }
+      },
+  
+      "dome": {
+        "title": "Dome",
+        "description": "Aerodynamic geometry resistant to wind and thermal fluctuation.",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 2,
+          "tropical": 2
+        }
+      },
+  
+      "shell": {
+        "title": "Shell",
+        "description": "Curved biomimetic shell structure inspired by natural forms.",
+        "compatibility": {
+          "dry": 2,
+          "temperate": 2,
+          "tropical": 3
+        }
+      },
+  
+      "cell": {
+        "title": "Cellular",
+        "description": "Modular clustered units allowing adaptive expansion.",
+        "compatibility": {
+          "dry": 2,
+          "temperate": 3,
+          "tropical": 2
+        }
+      }
+    },
+  
+    "material": {
+      "mycelium": {
+        "title": "Mycelium Composite",
+        "description": "Biodegradable fungal insulation with strong thermal properties.",
+        "compatibility": {
+          "dry": 2,
+          "temperate": 3,
+          "tropical": 2
+        }
+      },
+  
+      "plastic": {
+        "title": "Recycled Plastic",
+        "description": "Lightweight and weather-resistant recycled polymer panels.",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 2,
+          "tropical": 1
+        }
+      },
+
+      "earth": {
+        "title": "Rammed Earth",
+        "description": "Compressed natural soil walls with high thermal mass that stabilize indoor temperatures",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 2,
+          "tropical": 1
+        }
+      },
+
+      "bamboo": {
+        "title": "Bamboo",
+        "description": "A fast-growing renewable energy used for lightweight and flexible strucutral systems.",
+        "compatibility": {
+          "dry": 1,
+          "temperate": 3,
+          "tropical": 3
+        }
+      }
+    },
+  
+    "energy": {
+      "solar-skin": {
+        "title": "Solar Skin Roofing",
+        "description": "Integrated photovoltaic roofing membrane.",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 2,
+          "tropical": 3
+        }
+      },
+
+      "wind-turbines": {
+        "title": "Wind Microturbines",
+        "description": "Small-scale wind systems that generate electricity from local airflow conditions.",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 2,
+          "tropical": 2
+        }
+      },
+
+      "hydropower": {
+        "title": "Hydropower",
+        "description": "Energy generation using flowing or stored water to drive mechanical turbines.",
+        "compatibility": {
+          "dry": 0,
+          "temperate": 3,
+          "tropical": 3
+        }
+      },
+
+      "passive-cooling": {
+        "title": "Passive Cooling",
+        "description": "Design strategies that reduce heat gain and enhance natural ventilation without mechanical systems.",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 2,
+          "tropical": 3
+        }
+      }
+    },
+  
+    "water": {
+      "green-roof": {
+        "title": "Green Roof",
+        "description": "Vegetated roof system for insulation and water retention.",
+        "compatibility": {
+          "dry": 1,
+          "temperate": 3,
+          "tropical": 3
+        }
+      },
+
+      "condensate-harvest": {
+        "title": "Condensante Harvesting",
+        "description": "Systems that capture atmospheric moisture and condensation for usable water supply.",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 2,
+          "tropical": 2
+        }
+      },
+
+      "rain-capture": {
+        "title": "Rain Capture",
+        "description": "Roof and surface systems that collect and store rainwater for household use.",
+        "compatibility": {
+          "dry": 2,
+          "temperate": 3,
+          "tropical": 3
+        }
+      },
+
+      "greywater": {
+        "title": "Greywater harvesting",
+        "description": "Recycling lightly used water from sinks and showers for irrigation and reuse.",
+        "compatibility": {
+          "dry": 3,
+          "temperate": 3,
+          "tropical": 2
+        }
+      }
+    },
+
+    "food": {
+        "hydroponic": {
+            "title": "Hydroponic Walls",
+            "description": "Vertical soil-free farming systems that grow plants using nutrient-right water solutions.",
+            "compatibility": {
+              "dry": 3,
+              "temperate": 2,
+              "tropical": 2
+            }
+        },
+
+        "algae": {
+            "title": "Algae Tanks",
+            "description": "Closed-loop cultivation systems that produce food, biofuel, or oxygen-rich biomass.",
+            "compatibility": {
+              "dry": 2,
+              "temperate": 2,
+              "tropical": 3
+            }
+        },
+
+        "rooftop-gardens": {
+            "title": "Rooftop gardens",
+            "description": "Elevated planting systems that grow food while improving insulation and urban ecology.",
+            "compatibility": {
+              "dry": 1,
+              "temperate": 3,
+              "tropical": 3
+            }
+        },
+
+        "mushroom-module": {
+            "title": "Mushroom Cultivation Modules",
+            "description": "Controlled indoor systems that grow edible fungi using organic waste substrates.",
+            "compatibility": {
+              "dry": 2,
+              "temperate": 3,
+              "tropical": 2
+            }
+        }
+    },
+
+    "social": {
+        "shared-kitchen": {
+            "title": "Shared Kitchens",
+            "description": "Community cooking spaces that reduce resource use while encouraging collective food preparation."
+        },
+
+        "tool-libraries": {
+            "title": "Tool libraries",
+            "description": "Shared access systems that let communities borrow tools instead of individually owning them."
+        },
+
+        "childcare": {
+            "title": "Childcare cooperatives",
+            "description": "Community-run childcare systems that distribute caregiving responsibilities among families."
+        },
+
+        "battery": {
+            "title": "Communal battery grids",
+            "description": "Shared energy storage systems that balance and distribute renewable power across households."
+        }
+    }
+
+    
+  }

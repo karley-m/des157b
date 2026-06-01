@@ -1,0 +1,256 @@
+body {
+    margin:auto;
+}
+
+#overlay {
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index:3;
+}
+
+#overlay article {
+    box-sizing: border-box;
+    background-color:#fff;
+    padding: 20px;
+    width: 50vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: scroll;
+}
+
+section {
+    text-align: center;
+}
+
+#intro p {
+    font-family: "Pompiere";
+}
+
+h2 {
+    font-family: "Pompiere";
+}
+
+ol li {
+    font-family: "Nunito";
+}
+
+p {
+    font-family: "Nunito";
+}
+
+.error {
+    font-family: "Nunito";
+    margin:5px;
+}
+
+#c {
+    border: 2px solid black;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    background:white;
+    background-image: url("images/landscape-mobile.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.tippy-box {
+    font-family: "Nunito";
+    font-size:10px;
+    padding:7px;
+    background-color: rgba(20,20,20,0.5);
+}
+
+button {
+    margin-bottom:20px;
+    font-family: "Nunito";
+    padding:15px;
+    background-color:rgb(44, 44, 44);
+    color:white;
+}
+
+button:hover {
+    background-color:white;
+    color:black;
+    cursor:pointer;
+}
+
+.additional button {
+    padding:5px;
+    background-color:beige;
+    color:black;
+}
+
+.additional button:hover {
+    background-color:skyblue;
+}
+
+img:hover {
+    cursor:pointer;
+}
+
+#intro {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#intro p {
+    position: absolute;
+    width: 70%;
+    max-width: 800px;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+#intro button {
+    position: absolute;
+    bottom: 60px;
+    opacity: 0;
+}
+
+/* #gotostep1 {
+    left: 50%;
+    transform: translateX(-120%);
+} */
+
+.gotoneighborhood {
+    left: 50%;
+    transform: translateX(20%);
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.design-gallery {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px));
+    gap: 12px;
+    width: 100%;
+}
+
+.hidden {
+    display:none;
+}
+
+.show {
+    display:block;
+}
+
+@media (min-width: 768px) {
+
+    section {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        align-content:center;
+      }
+  
+    section h2 {
+        position: sticky;
+        top: 0;
+        background: white;
+    }
+
+    #intro p {
+        width:190ch;
+    }
+
+    #assemble p {
+        margin:10px;
+        text-align:center;
+        width:600px;
+        margin:auto;
+    }
+  
+    #material-options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    #c {
+        background:white;
+        background-image: url("images/landscape.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .canvas-container {
+        height: 90vh;
+        flex: 0 0 auto;
+        margin:auto;
+    }
+
+    .additional-wrapper {
+        display:flex;
+        flex-direction:column;
+        width:200px;
+        min-width:0;
+    }
+
+    .additional-wrapper p {
+        width:100%;
+        overflow-wrap: break-word;
+    }
+
+    .assemble-layout {
+        display:flex;
+        align-items:flex-start;
+        justify-content:center;
+    }
+
+    .options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        margin: auto;
+    }
+
+    .option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self:end;
+        text-align: center;
+        max-width: 260px;
+    }
+
+    .option img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .option p {
+        margin-top: 8px;
+    }
+  
+    .design-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 15px;
+    }
+  }
