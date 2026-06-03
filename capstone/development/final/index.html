@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pompiere&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- My Styles -->
     <link href="styles.css" rel="stylesheet">
 
@@ -22,21 +24,41 @@
     
 </head>
 <body>
-    
+    <img class="concept-gif seasons" src="images/seasons.gif" width="300">
+    <img class="concept-gif water" src="images/water.gif" width="300">
+    <img class="concept-gif wind" src="images/wind.gif" width="300">
+    <img class="concept-gif shade" src="images/shade.gif" width="300">
+    <img class="concept-gif weather" src="images/weather.gif" width="300">
+
+    <!-- <div class="catalog-images">
+        <img src="images/sears1.jpg" class="catalog-img left img1">
+        <img src="images/sears2.jpg" class="catalog-img right img2">
+        <img src="images/sears3.jpg" class="catalog-img left img3">
+    </div> -->
+
+    <div id="progress-container" class="hidden">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="helpBtn"><i class="fa-regular fa-circle-question" style="color: darkgray;"></i></div>
 
     <!-- loading screen -->
     <section id="intro">
-        <p>For most of human history, people lived closer to the environments around them.</p>
-        <p>We moved with<br>seasons,<br>water,<br>wind,<br>shade,<br>and weather.</p>
+        <p>For most of human history, people lived closer to the environments around them.<br><span><i class="fa-solid fa-angle-down"></i></span></p>
+        <p class="hover-states">We moved with<br><span data-target="seasons">seasons</span>,<br><span data-target="water">water</span>,<br><span data-target="wind">wind</span>,<br><span data-target="shade">shade</span>,<br>and <span data-target="weather">weather</span>.</p>
         <p>Shelter responded to climate because it had to.</p>
         <p>Over time, we built more permanent systems. Homes became standardized, and cheap energy made it easier to build the same way almost anywhere.</p>
         <p>But climates are different and now they're changing.</p>
-        <p>In the early 1900s, entire homes could be ordered from a catalog and assembled by me and you.</p>
-        <p>Parts arrived by rail, instructions arrived on paper. Many of those homes still stand today.</p>
+        <!-- <div class="catalog-scene"> -->
+            <p class="catalog-text">In the early 1900s, entire homes could be ordered from a catalog and assembled by an ordinary person.</p>
+        <!-- </div> -->
+        <p>Parts arrived by rail and instructions arrived on paper. Many of those homes still stand today.</p>
         <p>The future of housing may not be about building bigger or more permanent homes. It may be about building homes that repsond better to the places they exist in.</p>
-        <p>Build a home kit designed for its environment with some alternative, sustainable parts.</p>
+        <p>Build a home kit designed for its environment with alternative, sustainable parts.</p>
         <button id="gotostep1">Start</button>
     </section>
+
+    
 
     <!-- step 1 -->
     <section id="step1" class="hidden">
@@ -157,9 +179,6 @@
                 <p>greywater recylcing</p>
             </div>
         </div>
-        
-        
-        
         <div id="error-step5" class="error"></div>
         <button id="gotostep6">next</button>
     </section>
@@ -244,20 +263,65 @@
                     <button class="add-item" data-item="tree">Tree</button>
                     <button class="add-item" data-item="bike">Bike</button>
                 </div>
+                
                 <button id="saveDesign">Save Design</button>
             </div>
-            
         </div>
-        
-        
-        
     </section>
 
     <!-- neighborhood -->
     <section id="neighborhood" class="hidden">
         <h2>Check out other people's creations.</h2>
-        <button id="backtohome">Back to Home</button>
+        <!-- <button id="backtohome">Back to Home</button> -->
     </section>
+
+    <div id="saveOverlay" class="overlay hidden">
+        <article>
+            <h3 id="overlayMessage">Saving...</h3>
+    
+            <div id="successActions" class="hidden">
+                <button id="downloadBtn">Download Image</button>
+                <button class="neighborhoodBtn">Visit Neighborhood</button>
+            </div>
+        </article>
+    </div>
+
+    <div id="helpOverlay" class="overlay hidden">
+        <article>
+            <h3>More Information</h3>
+
+            <div id="helpContent">
+                <div id="part1">
+                    <p>Each dot represents a different level of compatability between the option and the different climates:</p>
+                    <div id="chart">
+                        <div id="great" class="dot"></div>
+                        <p>= great compatability</p>
+                        <div id="good" class="dot"></div>
+                        <p>= good compatability</p>
+                        <div id="ok" class="dot"></div>
+                        <p>= just ok compatability</p>
+                        <div id="notgood" class="dot"></div>
+                        <p>= least ideal compatability</p>
+                    </div>
+                </div>
+                
+                <div id="part2">
+                    <p><a href="#">Learn more about the process behind this project</a></p>
+                    <p><a href="#">Colophon</a></p>
+                    <p><a href="#">Sources</a></p>
+                    <p>Made by <a href="#">Karley</a></p>
+                </div>
+            </div>
+
+            <div id="soundSelect">
+                <i class="fa-solid fa-toggle-off"></i>
+                <p>Sound effects</p>
+            </div>
+            
+            <button id="hideHelp">Close</button>
+            <button class="neighborhoodBtn">Visit Neighborhood</button>
+        </article>
+    </div>
 
 
     <!-- parse script -->

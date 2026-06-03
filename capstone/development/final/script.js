@@ -76,6 +76,19 @@
         bike: "images/bike.png"
     };
 
+    const backgrounds = {
+        dry: "images/dry-footer.png",
+        temperate: "images/temperate-footer.png",
+        tropical: "images/tropical-footer.png"
+    }
+
+    const totalSteps = 8;
+
+    function updateProgress(stepIndex) {
+        const progress = (stepIndex / totalSteps) * 100;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
+    }
+
     //handling error
     function showError(errorId, message) {
         const errorBox = document.getElementById(errorId);
@@ -100,6 +113,19 @@
         return true;
     }
 
+    function footerVisuals() {
+        const climate = selections.climate?.value;
+        const html = document.querySelector('html');
+        if (climate === 'dry') {
+            html.style.backgroundImage = "url('images/dry-footer.png')";
+        } else if (climate === 'temperate') {
+            html.style.backgroundImage = "url('images/temperate-footer.png')";
+        } else {
+            html.style.backgroundImage = "url('images/tropical-footer.png')"
+        }
+
+    }
+
     //hiding and showing sections
     function showSection(indexToShow) {
         sections.forEach(function (sec) {
@@ -109,6 +135,8 @@
 
         sections[indexToShow].classList.remove('hidden');
         sections[indexToShow].classList.add('show');
+
+        updateProgress(indexToShow);
 
         TweenMax.fromTo(sections[indexToShow], 1, {
             opacity: 0,
@@ -222,7 +250,6 @@
         container.innerHTML = '';
         const imagePath = `images/vegetables-${shape}.png`;
         const wrapper = document.createElement('div');
-        console.log("renderGardenChoices fired");
         console.log("shape:", shape);
         console.log("path:", imagePath);
     
@@ -284,6 +311,7 @@
         introTimeline.kill();
 
         document.querySelector('#intro').style.display = "none";
+        document.querySelector('#progress-container').classList.remove("hidden");
         showSection(1);
         
     });
@@ -292,6 +320,7 @@
     document.querySelector('#gotostep2').addEventListener('click', function(){
         if (!validateSelection('climate','error-step1')) return;
         showSection(2);
+        footerVisuals()
     });
 
     // -------------- going to material screen ------------------
@@ -340,58 +369,104 @@
         renderFabricScene();
     });
 
-    // // -------------- save button ------------------
+    function showOverlay(message) {
+        document.getElementById('overlayMessage').textContent = message;
+        document.getElementById('saveOverlay').classList.remove('hidden');
+    }
+    
+    function showSuccess() {
+        document.getElementById('overlayMessage').textContent = 'Success!';
+        document.getElementById('successActions').classList.remove('hidden');
+    }
+
+    document.querySelector('#helpBtn').addEventListener('click', function(){
+        document.querySelector('#helpOverlay').classList.remove("hidden");
+    });
+
+    document.querySelector('#hideHelp').addEventListener('click', function(){
+        document.querySelector('#helpOverlay').classList.add("hidden");
+    });
+
+    // -------------- save button ------------------
     document.querySelector('#saveDesign').addEventListener('click', async function () {
 
+        showOverlay('Saving...');
+    
         const originalBg = canvas.backgroundColor;
+    
         canvas.backgroundColor = "white";
         canvas.renderAll();
-
-        //jpg for user download
+    
         const jpgData = canvas.toDataURL({
             format: 'jpeg',
             quality: 1
         });
-
+    
         canvas.backgroundColor = null;
         canvas.renderAll();
     
-        //png for back4app
         const pngData = canvas.toDataURL({
             format: 'png'
         });
-
+    
         canvas.backgroundColor = originalBg;
         canvas.renderAll();
-
+    
         try {
-            const result = await Parse.Cloud.run('saveDesignPng', {
-                pngData: pngData,
-                selections: selections
+    
+            await Parse.Cloud.run('saveDesignPng', {
+                pngData,
+                selections
             });
     
-            console.log('Saved design:', result);
-        } catch (error) {
-            console.error('Save failed:', error);
-        }
+            showSuccess();
+    
+            document.getElementById('downloadBtn').onclick = () => {
+                const link = document.createElement('a');
+                link.href = jpgData;
+                link.download = 'climate-home.jpg';
+                link.click();
+            };
+    
+            document.getElementById('neighborhoodBtn').onclick = async () => {
+                document.getElementById('saveOverlay').classList.add('hidden');
+                document.querySelector('html').style.backgroundImage = "none";
+                document.querySelector('#progress-container').classList.add("hidden");
+            
+                showSection(9);
+                await loadDesignIntoNeighborhood();
+            };
 
-        //user download locally
-        const link = document.createElement('a');
-        link.href = jpgData;
-        link.download = 'climate-home.jpg';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+            } catch (error) {
+    
+            console.error(error);
+    
+            document.getElementById('overlayMessage').textContent =
+                'Upload failed. Please try again.';
+            }
+
+        // document.querySelector('.neighborhoodBtn').addEventListener('click', async function({
+        //     // document.getElementById('saveOverlay').classList.add('hidden');
+        //     document.querySelector('#saveOverlay').classList.add('hidden');
+        //     document.querySelector('html').style.backgroundImage = "none";
+        
+        //     showSection(9);
+        //     await loadDesignIntoNeighborhood();
+        // }))
     });
+
+
+
+    
 
 
     // -------------- going to neighborhood screen ------------------
-    document.querySelectorAll('.gotoneighborhood').forEach(function (btn) {
-        btn.addEventListener('click', async function () {
-            showSection(10);
-            await loadDesignIntoNeighborhood();
-        });
-    });
+    // document.querySelectorAll('.gotoneighborhood').forEach(function (btn) {
+    //     btn.addEventListener('click', async function () {
+    //         showSection(10);
+    //         await loadDesignIntoNeighborhood();
+    //     });
+    // });
 
     
     // TODO: create loading screen before displaying neighborhood
@@ -407,7 +482,7 @@
             const results = await query.find();
             const items = Array.isArray(results) ? results : Array.from(results || []);
 
-            const neighborhoodSection = document.querySelectorAll("section")[10];
+            const neighborhoodSection = document.querySelectorAll("section")[9];
             if (!neighborhoodSection) return;
 
             let gallery = neighborhoodSection.querySelector(".design-gallery");
@@ -440,9 +515,9 @@
 
 
     // -------------- going back to first intro screen ------------------
-    document.querySelector('#backtohome').addEventListener('click', function(){
-        showSection(0);
-    });
+    // document.querySelector('#backtohome').addEventListener('click', function(){
+    //     showSection(0);
+    // });
 
     //for adjusting fabric.js canvas size based on mobile view
     function getLayoutConfig() {
@@ -543,10 +618,29 @@
                 });
     
                 img.scaleToWidth(80);
+                img.isAdditional = true;
                 canvas.add(img);
+                if (type === 'tree') {
+                    img.sendToBack();
+                }
                 canvas.setActiveObject(img);
             });
         });
+    });
+
+    document.addEventListener('keydown', function(e) {
+
+        if (e.key !== 'Delete' && e.key !== 'Backspace') return;
+    
+        const active = canvas.getActiveObject();
+    
+        if (!active) return;
+    
+        if (active.isAdditional) {
+            canvas.remove(active);
+            canvas.discardActiveObject();
+            canvas.renderAll();
+        }
     });
 
     loadTooltipData();
@@ -681,6 +775,87 @@
         "#intro",
         "#gotostep1"
     );
+
+    function hideAllGifs() {
+        document.querySelectorAll(".concept-gif").forEach(gif => {
+            gif.classList.remove("active");
+        });
+    }
+    
+    ScrollTrigger.create({
+        trigger: ".hover-states",
+    
+        start: "top center",
+        end: "bottom center",
+    
+        onLeave: hideAllGifs,
+        onLeaveBack: hideAllGifs
+    });
+
+    const words = document.querySelectorAll(".hover-states span");
+
+    words.forEach(word => {
+
+        const target = document.querySelector(
+            "." + word.dataset.target
+        );
+    
+        word.addEventListener("mouseenter", () => {
+    
+            const opacity = gsap.getProperty(
+                document.querySelector(".hover-states"),
+                "opacity"
+            );
+    
+            if (opacity < 0.5) return;
+    
+            hideAllGifs();
+    
+            target.classList.add("active");
+        });
+    
+        word.addEventListener("mouseleave", () => {
+            hideAllGifs();
+        });
+    
+    });
+
+    const scene = document.querySelector(".catalog-scene");
+    const images = document.querySelectorAll(".catalog-img");
+
+    gsap.fromTo(images,
+    {
+        opacity: 0,
+        y: 40
+    },
+    {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        ease: "none",
+        scrollTrigger: {
+        trigger: scene,
+        start: "top 70%",
+        end: "bottom 30%",
+        scrub: true
+        }
+    }
+    );
+
+    images.forEach((img, i) => {
+
+        gsap.to(img, {
+          y: -80 - (i * 30),
+          ease: "none",
+          scrollTrigger: {
+            trigger: scene,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+      
+    });
     
 
 
