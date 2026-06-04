@@ -457,6 +457,14 @@
               document.getElementById('saveOverlay')?.classList.add('hidden');
               document.querySelector('html').style.backgroundImage = 'none';
               document.querySelector('#progress-container')?.classList.add('hidden');
+
+              const introSection = document.querySelector('#intro');
+                introSection.classList.add('hidden');
+                introSection.style.display = "none";
+                gsap.set(introSection, {
+                    clearProps: "all"
+                });
+                ScrollTrigger.refresh();
         
               showSection(9);
               await loadDesignIntoNeighborhood();
