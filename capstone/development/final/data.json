@@ -1,7 +1,7 @@
 {
     "climate": {
     "dry": {
-      "description": "Drought followed by flash floods. Extreme heatwaves, dust storms, and wildfires."
+      "description": "Minimal rainfall, low humidity, and lots of sun during the day with cold nights."
     },
 
     "temperate": {

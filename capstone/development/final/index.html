@@ -251,10 +251,12 @@
         
             <div class="canvas-container">
                 <canvas id="c" width="800" height="600"></canvas>
+                <img id="placehere" src="images/placehere.png" width="400">
             </div>
+            
     
             <div class="additional-wrapper">
-                <p>Drag each piece and arrange the items to your desire. Make sure to have your home in the center and have it fill up majority of the canvas. When you're done, first click save and then check out other creations in the neghborhood.</p>
+                <p>Drag each piece and arrange the items to your desire. Have your home fill up the size of the square. When you're done, click save and then check out other creations in the neghborhood.<br>** Warning: adjusting your browser size will reset the position of the items.</p>
                 <p>Additional items:</p>
                 <div class="additional">
                     <button class="add-item" data-item="cat">Cat</button>
@@ -314,11 +316,11 @@
             </div>
 
             <div id="soundSelect">
-                <i class="fa-solid fa-toggle-off"></i>
-                <p>Sound effects</p>
+                <input type="checkbox" id="sound" value="yes">
+                <label for="sound">Sound effects</label>
             </div>
             
-            <button id="hideHelp">Close</button>
+            <i id="hideHelp" class="fa-solid fa-xmark" style="color: rgb(0, 0, 0);"></i>
             <button class="neighborhoodBtn">Visit Neighborhood</button>
         </article>
     </div>

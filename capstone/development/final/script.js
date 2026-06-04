@@ -76,12 +76,6 @@
         bike: "images/bike.png"
     };
 
-    const backgrounds = {
-        dry: "images/dry-footer.png",
-        temperate: "images/temperate-footer.png",
-        tropical: "images/tropical-footer.png"
-    }
-
     const totalSteps = 8;
 
     function updateProgress(stepIndex) {
@@ -187,7 +181,6 @@
         }, 0);
     }
 
-
     //identifying shape chosen and grabbing the images for the solar-roof option in energy section
     function renderSolarChoices() {
         const shape = selections.shape?.value;
@@ -258,7 +251,7 @@
                 src="${imagePath}"
                 class="choice"
                 data-category="food"
-                data-value="garden"
+                data-value="rooftop-gardens"
                 data-image="${imagePath}"
                 width="300"
             > 
@@ -270,7 +263,6 @@
             setupTooltips();
         }, 0);
     }
-
 
     function attachChoiceListeners() {
         document.querySelectorAll('.choice').forEach(function(img) {
@@ -303,7 +295,6 @@
             renderMaterialChoices();
         }
     }
-
 
     // -------------- going to climate screen ------------------
     document.querySelector('#gotostep1').addEventListener('click', function(){
@@ -381,6 +372,39 @@
 
     document.querySelector('#helpBtn').addEventListener('click', function(){
         document.querySelector('#helpOverlay').classList.remove("hidden");
+
+        document.querySelectorAll('.neighborhoodBtn').forEach((neighborhoodBtn) => {
+            neighborhoodBtn.addEventListener('click', async function () {
+                if (introTimeline.scrollTrigger) {
+                    introTimeline.scrollTrigger.kill();
+                }
+                introTimeline.kill();
+
+                ScrollTrigger.getAll().forEach(st => st.kill());
+
+                document.getElementById('helpOverlay')?.classList.add('hidden');
+                document.querySelector('html').style.backgroundImage = 'none';
+                document.querySelector('#progress-container')?.classList.add('hidden');
+        
+                const introSection = document.querySelector('#intro');
+                introSection.classList.add('hidden');
+                introSection.style.display = "none";
+                gsap.set(introSection, {
+                    clearProps: "all"
+                });
+                ScrollTrigger.refresh();
+                showSection(9);
+                await loadDesignIntoNeighborhood();
+
+                const designImages = document.querySelectorAll('.design-gallery img');
+                const colors = ['rgba(164, 221, 5, 0.3)', 'rgba(231, 255, 0, 0.3)', 'rgba(0, 221, 120, 0.3)'];
+                        
+                designImages.forEach(img => {
+                    const randomIndex = Math.floor(Math.random() * colors.length);
+                    img.style.backgroundColor = colors[randomIndex];
+                });
+            });
+          });
     });
 
     document.querySelector('#hideHelp').addEventListener('click', function(){
@@ -389,84 +413,67 @@
 
     // -------------- save button ------------------
     document.querySelector('#saveDesign').addEventListener('click', async function () {
-
         showOverlay('Saving...');
-    
+      
         const originalBg = canvas.backgroundColor;
-    
-        canvas.backgroundColor = "white";
+      
+        canvas.backgroundColor = 'white';
         canvas.renderAll();
-    
+      
         const jpgData = canvas.toDataURL({
-            format: 'jpeg',
-            quality: 1
+          format: 'jpeg',
+          quality: 1
         });
-    
+      
         canvas.backgroundColor = null;
         canvas.renderAll();
-    
+      
         const pngData = canvas.toDataURL({
-            format: 'png'
+          format: 'png'
         });
-    
+      
         canvas.backgroundColor = originalBg;
         canvas.renderAll();
-    
-        try {
-    
-            await Parse.Cloud.run('saveDesignPng', {
-                pngData,
-                selections
-            });
-    
-            showSuccess();
-    
-            document.getElementById('downloadBtn').onclick = () => {
-                const link = document.createElement('a');
-                link.href = jpgData;
-                link.download = 'climate-home.jpg';
-                link.click();
-            };
-    
-            document.getElementById('neighborhoodBtn').onclick = async () => {
-                document.getElementById('saveOverlay').classList.add('hidden');
-                document.querySelector('html').style.backgroundImage = "none";
-                document.querySelector('#progress-container').classList.add("hidden");
-            
-                showSection(9);
-                await loadDesignIntoNeighborhood();
-            };
+      
+        await Parse.Cloud.run('saveDesignPng', {
+          pngData,
+          selections
+        });
+      
+        showSuccess();
+      
+        const downloadBtn = document.getElementById('downloadBtn');
+        if (downloadBtn) {
+          downloadBtn.addEventListener('click', function () {
+            const link = document.createElement('a');
+            link.href = jpgData;
+            link.download = 'climate-home.jpg';
+            link.click();
+          });
+        }
 
-            } catch (error) {
-    
-            console.error(error);
-    
-            document.getElementById('overlayMessage').textContent =
-                'Upload failed. Please try again.';
-            }
-
-        // document.querySelector('.neighborhoodBtn').addEventListener('click', async function({
-        //     // document.getElementById('saveOverlay').classList.add('hidden');
-        //     document.querySelector('#saveOverlay').classList.add('hidden');
-        //     document.querySelector('html').style.backgroundImage = "none";
+        document.querySelectorAll('.neighborhoodBtn').forEach((neighborhoodBtn) => {
+            neighborhoodBtn.addEventListener('click', async function () {
+              document.getElementById('saveOverlay')?.classList.add('hidden');
+              document.querySelector('html').style.backgroundImage = 'none';
+              document.querySelector('#progress-container')?.classList.add('hidden');
         
-        //     showSection(9);
-        //     await loadDesignIntoNeighborhood();
-        // }))
-    });
+              showSection(9);
+              await loadDesignIntoNeighborhood();
+            const designImages = document.querySelectorAll('.design-gallery img');
+            const colors = ['rgba(164, 221, 5, 0.3)', 'rgba(231, 255, 0, 0.3)', 'rgba(0, 221, 120, 0.3)'];
+                        
+            designImages.forEach(img => {
+                const randomIndex = Math.floor(Math.random() * colors.length);
+                img.style.backgroundColor = colors[randomIndex];
+            });
+            });
+          });
+      
+        
+      });
 
-
-
-    
-
-
-    // -------------- going to neighborhood screen ------------------
-    // document.querySelectorAll('.gotoneighborhood').forEach(function (btn) {
-    //     btn.addEventListener('click', async function () {
-    //         showSection(10);
-    //         await loadDesignIntoNeighborhood();
-    //     });
-    // });
+      
 
     
     // TODO: create loading screen before displaying neighborhood
@@ -856,7 +863,11 @@
         });
       
     });
+
     
+
+    
+        
 
 
 })();
