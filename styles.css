@@ -364,3 +364,34 @@ body.switch #phrase p:last-of-type {
         top:90px;
     }
 }
+
+@media (min-width: 1400px) {
+    body {
+        background-image:url(images/imacBG.jpg);
+        
+    }
+
+    body.switch {
+        background-image:url(images/imacBG-night.jpg);
+    }
+
+    #container {
+        width:1000px;
+        margin-right:10px;
+        padding-top:260px;
+        padding-left:150px;
+        position:absolute;
+        bottom:15%;
+        right:7%;
+    }
+
+    main {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1em auto;
+    }
+
+    button {
+        top:230px;
+    }
+}
