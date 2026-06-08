@@ -365,7 +365,7 @@ body.switch #phrase p:last-of-type {
     }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1600px) {
     body {
         background-image:url(images/imacBG.jpg);
         
