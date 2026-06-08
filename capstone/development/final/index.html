@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climate Kit Home</title>
+    <title>Climate Home Kit</title>
 
     <!-- Normalize CSS for browser compatability -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
@@ -29,12 +29,6 @@
     <img class="concept-gif wind" src="images/wind.gif" width="300">
     <img class="concept-gif shade" src="images/shade.gif" width="300">
     <img class="concept-gif weather" src="images/weather.gif" width="300">
-
-    <!-- <div class="catalog-images">
-        <img src="images/sears1.jpg" class="catalog-img left img1">
-        <img src="images/sears2.jpg" class="catalog-img right img2">
-        <img src="images/sears3.jpg" class="catalog-img left img3">
-    </div> -->
 
     <div id="progress-container" class="hidden">
         <div id="progress-bar"></div>
@@ -274,7 +268,7 @@
     <!-- neighborhood -->
     <section id="neighborhood" class="hidden">
         <h2>Check out other people's creations.</h2>
-        <!-- <button id="backtohome">Back to Home</button> -->
+        <button id="restart">Restart</button>
     </section>
 
     <div id="saveOverlay" class="overlay hidden">
@@ -309,20 +303,26 @@
                 
                 <div id="part2">
                     <p><a href="#">Learn more about the process behind this project</a></p>
-                    <p><a href="#">Colophon</a></p>
-                    <p><a href="#">Sources</a></p>
-                    <p>Made by <a href="#">Karley</a></p>
-                </div>
+    
+                    <p id="docs">
+                        <a href="https://docs.google.com/document/d/1tUJvOMZu4thHSj-ZDTrH2aJJxWTkEKmUG9OPSpMbs_Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Colophon</a> | <a href="https://docs.google.com/document/d/1G4X0ox8t2tRXSYMSLkLDh4R9g9mxjlg9j0Hw-0OHeO8/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Sources</a>
+                    </p>
+
+                    <button class="neighborhoodBtn">Visit Neighborhood</button>
+
+                    <div id="soundSelect">
+                        <input type="checkbox" id="sound" value="yes">
+                        <label for="sound">Sound effects</label>
+                    </div>
+                </div>   
             </div>
 
-            <div id="soundSelect">
-                <input type="checkbox" id="sound" value="yes">
-                <label for="sound">Sound effects</label>
-            </div>
+            <i id="hideHelp" class="fa-regular fa-x" style="color: rgb(0, 0, 0);"></i>
             
-            <i id="hideHelp" class="fa-solid fa-xmark" style="color: rgb(0, 0, 0);"></i>
-            <button class="neighborhoodBtn">Visit Neighborhood</button>
         </article>
+    </div>
+
+    <div id="footerVisual">
     </div>
 
 

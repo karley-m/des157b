@@ -9,6 +9,7 @@
     console.log("Parse object:", Parse);
     console.log("Parse initialized:", Parse.applicationId);
 
+
     //getting tooltip data from JSON
     let tooltipData = {};
 
@@ -72,11 +73,19 @@
         cat: "images/cat.png",
         couch: "images/couch.png",
         dog: "images/dog.png",
-        tree: "images/tree.png",
+        tree: {
+            dry: "images/tree-dry.png",
+            temperate: "images/tree-temperate.png",
+            tropical: "images/tree-tropical.png"
+        },
         bike: "images/bike.png"
     };
 
     const totalSteps = 8;
+
+    document.querySelectorAll('.neighborhoodBtn').forEach(btn => {
+        btn.addEventListener('click', openNeighborhood);
+    });
 
     function updateProgress(stepIndex) {
         const progress = (stepIndex / totalSteps) * 100;
@@ -109,16 +118,20 @@
 
     function footerVisuals() {
         const climate = selections.climate?.value;
-        const html = document.querySelector('html');
+        const footer = document.querySelector('#footerVisual');
         if (climate === 'dry') {
-            html.style.backgroundImage = "url('images/dry-footer.png')";
+            footer.style.backgroundImage = "url('images/dry-footer.png')";
         } else if (climate === 'temperate') {
-            html.style.backgroundImage = "url('images/temperate-footer.png')";
+            footer.style.backgroundImage = "url('images/temperate-footer.png')";
         } else {
-            html.style.backgroundImage = "url('images/tropical-footer.png')"
+            footer.style.backgroundImage = "url('images/tropical-footer.png')"
         }
 
+        footer.classList.add('show');
+
     }
+
+   
 
     //hiding and showing sections
     function showSection(indexToShow) {
@@ -357,7 +370,14 @@
         if (!validateSelection('social','error-step7')) return;
         clearError();
         showSection(8);
+        resizeCanvas();
         renderFabricScene();
+
+        console.log({
+            innerHeight: window.innerHeight,
+            bodyScrollHeight: document.body.scrollHeight,
+            htmlScrollHeight: document.documentElement.scrollHeight
+        });
     });
 
     function showOverlay(message) {
@@ -372,40 +392,51 @@
 
     document.querySelector('#helpBtn').addEventListener('click', function(){
         document.querySelector('#helpOverlay').classList.remove("hidden");
-
-        document.querySelectorAll('.neighborhoodBtn').forEach((neighborhoodBtn) => {
-            neighborhoodBtn.addEventListener('click', async function () {
-                if (introTimeline.scrollTrigger) {
-                    introTimeline.scrollTrigger.kill();
-                }
-                introTimeline.kill();
-
-                ScrollTrigger.getAll().forEach(st => st.kill());
-
-                document.getElementById('helpOverlay')?.classList.add('hidden');
-                document.querySelector('html').style.backgroundImage = 'none';
-                document.querySelector('#progress-container')?.classList.add('hidden');
-        
-                const introSection = document.querySelector('#intro');
-                introSection.classList.add('hidden');
-                introSection.style.display = "none";
-                gsap.set(introSection, {
-                    clearProps: "all"
-                });
-                ScrollTrigger.refresh();
-                showSection(9);
-                await loadDesignIntoNeighborhood();
-
-                const designImages = document.querySelectorAll('.design-gallery img');
-                const colors = ['rgba(164, 221, 5, 0.3)', 'rgba(231, 255, 0, 0.3)', 'rgba(0, 221, 120, 0.3)'];
-                        
-                designImages.forEach(img => {
-                    const randomIndex = Math.floor(Math.random() * colors.length);
-                    img.style.backgroundColor = colors[randomIndex];
-                });
-            });
-          });
     });
+
+    async function openNeighborhood() {
+
+        if (introTimeline.scrollTrigger) {
+            introTimeline.scrollTrigger.kill();
+        }
+    
+        introTimeline.kill();
+    
+        ScrollTrigger.getAll().forEach(st => st.kill());
+    
+        document.querySelector('#helpOverlay')?.classList.add('hidden');
+        document.querySelector('#saveOverlay')?.classList.add('hidden');
+    
+        document.querySelector('html').style.backgroundImage = 'none';
+        document.querySelector('#progress-container')?.classList.add('hidden');
+    
+        const introSection = document.querySelector('#intro');
+    
+        if (introSection) {
+            introSection.classList.add('hidden');
+            introSection.style.display = 'none';
+        }
+    
+        window.scrollTo(0, 0);
+
+        document.querySelector('#footerVisual').classList.add('hidden');
+        document.querySelector('#footerVisual').classList.remove('show');
+    
+        showSection(9);
+    
+        await loadDesignIntoNeighborhood();
+    
+        // const colors = [
+        //     'rgba(164, 221, 5, 0.3)',
+        //     'rgba(231, 255, 0, 0.3)',
+        //     'rgba(0, 221, 120, 0.3)'
+        // ];
+    
+        // document.querySelectorAll('.design-gallery img').forEach(img => {
+        //     img.style.backgroundColor =
+        //         colors[Math.floor(Math.random() * colors.length)];
+        // });
+    }
 
     document.querySelector('#hideHelp').addEventListener('click', function(){
         document.querySelector('#helpOverlay').classList.add("hidden");
@@ -444,42 +475,16 @@
       
         const downloadBtn = document.getElementById('downloadBtn');
         if (downloadBtn) {
-          downloadBtn.addEventListener('click', function () {
-            const link = document.createElement('a');
-            link.href = jpgData;
-            link.download = 'climate-home.jpg';
-            link.click();
-          });
+            downloadBtn.addEventListener('click', function () {
+                const link = document.createElement('a');
+                link.href = jpgData;
+                link.download = 'climate-home.jpg';
+                link.click();
+            });
         }
-
-        document.querySelectorAll('.neighborhoodBtn').forEach((neighborhoodBtn) => {
-            neighborhoodBtn.addEventListener('click', async function () {
-              document.getElementById('saveOverlay')?.classList.add('hidden');
-              document.querySelector('html').style.backgroundImage = 'none';
-              document.querySelector('#progress-container')?.classList.add('hidden');
-
-              const introSection = document.querySelector('#intro');
-                introSection.classList.add('hidden');
-                introSection.style.display = "none";
-                gsap.set(introSection, {
-                    clearProps: "all"
-                });
-                ScrollTrigger.refresh();
-        
-              showSection(9);
-              await loadDesignIntoNeighborhood();
-            const designImages = document.querySelectorAll('.design-gallery img');
-            const colors = ['rgba(164, 221, 5, 0.3)', 'rgba(231, 255, 0, 0.3)', 'rgba(0, 221, 120, 0.3)'];
-                        
-            designImages.forEach(img => {
-                const randomIndex = Math.floor(Math.random() * colors.length);
-                img.style.backgroundColor = colors[randomIndex];
-            });
-            });
-          });
       
         
-      });
+        });
 
       
 
@@ -622,7 +627,12 @@
     document.querySelectorAll('.add-item').forEach(btn => {
         btn.addEventListener('click', function() {
             const type = this.dataset.item;
-            const url = assetMap[type];
+            let url = assetMap[type];
+
+            if (type === 'tree') {
+                const climate = selections.climate?.value || 'temperate';
+                url = assetMap.tree[climate];
+            }
     
             fabric.Image.fromURL(url, function(img) {
                 img.set({
@@ -835,42 +845,13 @@
     
     });
 
-    const scene = document.querySelector(".catalog-scene");
-    const images = document.querySelectorAll(".catalog-img");
+    document.querySelector('#restart').addEventListener('click',function(){
+        restartProject();
+    })
 
-    gsap.fromTo(images,
-    {
-        opacity: 0,
-        y: 40
-    },
-    {
-        opacity: 1,
-        y: 0,
-        stagger: 0.2,
-        ease: "none",
-        scrollTrigger: {
-        trigger: scene,
-        start: "top 70%",
-        end: "bottom 30%",
-        scrub: true
-        }
+    function restartProject() {
+        window.location.reload();
     }
-    );
-
-    images.forEach((img, i) => {
-
-        gsap.to(img, {
-          y: -80 - (i * 30),
-          ease: "none",
-          scrollTrigger: {
-            trigger: scene,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-      
-    });
 
     
 
