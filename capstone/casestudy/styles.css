@@ -18,47 +18,156 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     color: #333;
 }
+
+header {
+    margin-top:30px;
+}
+
+a {
+    color:black;
+}
+
+#top img {
+    position:absolute;
+    top:0px;
+    right:450px;
+}
+
 nav {
-    border-top: 2px solid #333;
+    background-color:black;
 }
 nav ul li a {
     text-decoration: none;
     display: block;
-    color:cornflowerblue;
+    color:white;
     font-weight: bold;
-    border-bottom: 2px solid #333;
     text-align: center;
     padding: 10px;
-
+    font-family:"Nunito";
 }
 
-header, footer {
-    background-color: rgb(235, 235, 235);
+nav ul li:nth-child(1) a:hover {
+    background-color:#CCA140;
 }
+  
+nav ul li:nth-child(2) a:hover {
+    background-color:#8E3671;
+}
+  
+nav ul li:nth-child(3) a:hover {
+    background-color:#24835C;
+}
+  
+nav ul li:nth-child(4) a:hover {
+    background-color:#CCA140;
+}
+
+nav ul li:nth-child(5) a:hover {
+    background-color:#8E3671;
+}
+
+nav ul li:nth-child(6) a:hover {
+    background-color:#24835C;
+}
+
+#overview h2 {
+    background-color:#CCA140;
+    color:white;
+    padding:10px;
+    margin:0;
+}
+
+section .content p {
+    padding-bottom:10px;
+}
+
+#research h2 {
+    background-color:#8E3671;
+    color:white;
+    padding:10px;
+}
+
+#design h2 {
+    background-color:#24835C;
+    color:white;
+    padding:10px;
+}
+
+figcaption {
+    font-family: "Nunito";
+    font-size:10px;
+    margin:0;
+    font-style:italic;
+}
+
+figure {
+    margin:0;
+}
+
+figure img {
+    margin-bottom:3px;
+}
+
+#ui h2 {
+    background-color:#CCA140;
+    color:white;
+    padding:10px;
+}
+
+#revisions h2 {
+    background-color:#8E3671;
+    color:white;
+    padding:10px;
+}
+
+#summary h2 {
+    background-color:#24835C;
+    color:white;
+    padding:10px;
+}
+
+em {
+    font-weight:700;
+    text-decoration:underline;
+}
+
 
 header, section, footer {
     padding: 20px;
-}
-
-section:nth-child(even){
-    background-color: aliceblue;
 }
 
 .container {
     max-width: 1000px;
 }
 
+
+h1 {
+    font-family: "Pompiere";
+    font-size:50px;
+}
+
+h2 {
+    font-family: "Nunito";
+    font-weight:900;
+}
+
 h1, h2 {
-    margin-bottom: .5em;
+    margin-bottom: 1em;
 }
 
 p {
     line-height: 1.4em;
-    margin-bottom: 1em;
+    /* margin-bottom: 1em; */
+    font-family: "Nunito";
+}
+
+address {
+    font-family: "Nunito";
 }
 
 ol li {
     margin-bottom: 1em;
+    font-family: "Nunito";
 }
 
 img {
