@@ -10,8 +10,6 @@ html {
     background-repeat:no-repeat;
 }
 
-
-
 body {
     margin:auto;
 }
@@ -25,7 +23,6 @@ body {
 .fa-toggle-off {
     font-size:40px;
 }
-
 
 @keyframes moveDown {
     0%, 100% {
@@ -243,7 +240,7 @@ img:hover {
 
 .design-gallery {
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 12px;
     width: 100%;
 }
